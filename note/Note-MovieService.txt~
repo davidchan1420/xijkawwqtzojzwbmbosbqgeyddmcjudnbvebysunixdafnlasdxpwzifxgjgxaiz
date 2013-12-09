@@ -1,0 +1,142 @@
+
+####################   MCL Cinema   ####################
+
+Chinese Version:
+http://www2.mclcinema.com/visMovieSelect.aspx?visLang=1
+English Version:
+http://www2.mclcinema.com/visMovieSelect.aspx?visLang=2
+
+
+<td class="MovieNameCell">
+	<a class="content_link" >電影名稱</a>
+
+<table class="SessionTableDate"
+
+	<td class="CinemaCell"
+		<a class="red_line" >戲院名稱</a>
+	<td class="SessionDropDownCell">
+		<select class="Combo" >
+			<option >星期四, 10月31日, 11:10 AM, 2院</option>
+			<option >星期四, 10月31日, 01:45 PM, 9院</option>
+		</select>
+
+	<td class="CinemaCell"
+		<a class="red_line" >戲院名稱</a>
+	<td class="SessionDropDownCell">
+		<select class="Combo" >
+			<option >星期四, 10月31日, 11:10 AM, 2院</option>
+			<option >星期四, 10月31日, 04:20 PM, 4院</option>
+		</select>
+
+
+####################   UA Cinema   ####################
+UA Director's Club
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=11
+UA 太古城中心
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=7
+皇室戲院
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=10
+新光戲院大劇場
+http://www.cityline.com/chi/sunbeam/byCinemaStep2.jsp?venueKey=12
+BEA IMAX @ UA iSQUARE
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=19
+BEA IMAX @ UA MegaBox
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=15
+UA 朗豪坊
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=9
+UA iSQUARE
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=18
+UA MegaBox
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=14
+影藝戲院
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=8
+機場 UA IMAX 影院
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=22
+UA 沙田
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=1
+UA 屯門市廣場
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=17
+UA 東薈城
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=6
+元朗戲院
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=21
+UA 銀河影院 (澳門)
+http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=20
+
+
+<font class="cinema_heading">戲院名稱</font>
+
+	<a href="./byMovieStep2.jsp?eventKey=">
+		<font class="row">電影名稱</font>
+
+	<select class="movie_selector" >
+		<option >Fri, Nov 01, 09:10 AM  House 1    $45.00</option>
+		<option >Sat, Nov 02, 09:00 AM  House 1    $45.00</option>
+	</select>
+
+	<a href="./byMovieStep2.jsp?eventKey=">
+		<font class="row">電影名稱</font>
+
+	<select class="movie_selector" >
+		<option >Fri, Nov 01, 09:10 AM  House 1    $45.00</option>
+		<option >Sat, Nov 02, 09:00 AM  House 1    $45.00</option>
+	</select>
+
+####################   Golden Harvest   ####################
+
+Chinese Version:
+http://www.goldenharvest.com/nowshowing.aspx?lang=cht
+English Version:
+http://www.goldenharvest.com/nowshowing.aspx?lang=eng
+
+<td class="BodyTitleLeft"><a >電影名稱</a>
+
+	<td class="BodyTextLeftBold"><a class="aCinema">戲院名稱</a></td>
+
+	<select class="cboShowNS">
+		<option >星期五, 11月1日 05:20 PM 3院 $70</option>
+		<option >星期六, 11月2日 09:00 AM 3院 $45</option>
+	</select>
+
+	<td class="BodyTextLeftBold">
+		<a class="aCinema">戲院名稱</a>
+
+	<select class="cboShowNS">
+		<option >星期五, 11月1日 05:20 PM 3院 $70</option>
+		<option >星期六, 11月2日 09:00 AM 3院 $45</option>
+	</select>
+
+####################   Broadway Cinema   ####################
+Chinese Version:
+http://www.cinema.com.hk/revamp/html/movie_ticketing.php?lang=c&mode=ticketing
+English Version:
+http://www.cinema.com.hk/revamp/html/movie_ticketing.php?lang=e&mode=ticketing
+
+<option value="10101835">08/12 12:20PM (Sun)  4院*  $60</option>
+<option value="14113988">13/04 03:50PM (Sun)  4院 $190</option>
+
+<span class="movie_title_listing">電影名稱</span>
+
+	<td class="movie_listbox"><a >戲院名稱</a></td>
+
+	<select class="movie_listbox" >													
+		<option >01/11 11:50PM (Fri)  3院 $75</option>	
+		<option >02/11 09:10AM (Sat)  3院*  $45</option>			
+	</select>
+
+	<td class="movie_listbox"><a >戲院名稱</a></td>
+
+	<select class="movie_listbox" >													
+		<option >01/11 09:50PM (Fri)  1院 $65</option>
+		<option >02/11 11:05AM (Sat)  3院*  $65</option>
+	</select>
+
+
+
+
+
+
+
+
+
+
