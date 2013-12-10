@@ -131,8 +131,8 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 							Coordinate coordinate = ConstantUtil.listCinema.get(index);
 							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
 						}
-					}					
-				}				
+					}
+				}
 				
 				Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
 				Matcher matTime = patTime.matcher(inputLine);

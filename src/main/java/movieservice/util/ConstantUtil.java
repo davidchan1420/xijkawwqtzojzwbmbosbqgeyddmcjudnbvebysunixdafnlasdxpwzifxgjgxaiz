@@ -5,12 +5,14 @@ import java.util.ArrayList;
 public class ConstantUtil {
 	
 	public static final String LANG_CHI = "CHI";
-	public static final String LANG_ENG = "ENG";
+	public static final String LANG_ENG = "ENG";	
+	private static final String MCL = "MCL";
 	
-	private static final String MCL = "MCL";	
+
 	
 	//public static HashMap<String, ArrayList<Coordinate>> mapCinema = new HashMap<String, ArrayList<Coordinate>>();
-	public static final ArrayList<Coordinate> listCinema = new ArrayList<Coordinate>();		
+	public static final ArrayList<Coordinate> listCinema = new ArrayList<Coordinate>();
+	public static final ArrayList<CoordinateUA> listCinemaUA = new ArrayList<CoordinateUA>();		
 	
 	static{
 		
@@ -33,13 +35,21 @@ public class ConstantUtil {
 		listCinema.add(new Coordinate("電影中心", "CINEMATHEQUE", 22.310694D, 114.168913D));		
 		listCinema.add(new Coordinate("旺角", "MONGKOK", 22.317116D, 114.170627D));		
 		listCinema.add(new Coordinate("PALACE  apm", "PALACE  apm", 22.312299D, 114.225355D));		
-		listCinema.add(new Coordinate("葵芳", "KWAI FONG", 22.357456D, 114.126156D));		
+		listCinema.add(new Coordinate("葵芳", "KWAI FONG", 22.357456D, 114.126156D));	
 		listCinema.add(new Coordinate("荃灣", "TSUEN WAN", 22.37124D, 114.111039D));
 		
 		listCinema.add(new Coordinate("元朗", "元朗", 22.445632D, 114.035822D));	//Reserved till 2013-03-06		
-		listCinema.add(new Coordinate("嘉湖銀座", "KINGSWOOD GINZA", 22.457246D, 114.004021D));
-		
+		listCinema.add(new Coordinate("嘉湖銀座", "KINGSWOOD GINZA", 22.457246D, 114.004021D));		
 //		listCinema.add(new Coordinate("", "", , ));
+		
+		listCinemaUA.add(new CoordinateUA("UA Director's Club", "UA Director's Club", "11", 22.286528D, 114.217421D));
+		listCinemaUA.add(new CoordinateUA("UA 太古城中心", "UA Cityplaza", "7", 22.286528D, 114.217421D));
+		listCinemaUA.add(new CoordinateUA("皇室戲院", "Windsor Cinema", "10", 22.280608D, 114.186774D));
+		listCinemaUA.add(new CoordinateUA("新光戲院大劇場", "Sunbeam Theatre", "12", 22.29128D, 114.199963D));
+		
+		listCinemaUA.add(new CoordinateUA("", "", "", , ));
+		
+//		listCinemaUA.add(new CoordinateUA("", "", "", , ));
 		
 	}
 	

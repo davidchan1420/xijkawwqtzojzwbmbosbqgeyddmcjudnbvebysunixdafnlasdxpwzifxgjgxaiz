@@ -38,6 +38,7 @@ http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=7
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=10
 新光戲院大劇場
 http://www.cityline.com/chi/sunbeam/byCinemaStep2.jsp?venueKey=12
+
 BEA IMAX @ UA iSQUARE
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=19
 BEA IMAX @ UA MegaBox

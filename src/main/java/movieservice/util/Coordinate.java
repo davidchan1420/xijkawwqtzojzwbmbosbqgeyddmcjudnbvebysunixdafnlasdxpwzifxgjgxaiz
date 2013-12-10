@@ -1,11 +1,13 @@
 package movieservice.util;
 
 public class Coordinate {
-	private Double x;
-	private Double y;
-	private String cinemaEnglish;
-	private String cinemaChinese;
+	protected Double x;
+	protected Double y;
+	protected String cinemaEnglish;
+	protected String cinemaChinese;
 
+	public Coordinate(){}
+	
 	// For Testing
 	public Coordinate(String cinema) {
 		this.cinemaChinese = cinema;
