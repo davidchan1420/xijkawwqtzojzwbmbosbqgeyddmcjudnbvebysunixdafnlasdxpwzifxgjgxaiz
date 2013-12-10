@@ -384,21 +384,25 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 		searchCriteria.setY(114.1882631D);
 		
 		MovieSearchServiceImpl instance = new MovieSearchServiceImpl();
-//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-//		List<Movie> list2 = instance.getGoldenHarvestMovies(searchCriteria);
+		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+		List<Movie> list2 = instance.getGoldenHarvestMovies(searchCriteria);
 		List<Movie> list3 = instance.getBroadwayMovies(searchCriteria);
 		
 		List<Movie> list = new ArrayList<Movie>();
 		
-//		list.addAll(list1);
-//		list.addAll(list2);
+		list.addAll(list1);
+		list.addAll(list2);
 		list.addAll(list3);
 		
+		System.out.println("list1 size: " + list1.size());
+		System.out.println("list2 size: " + list2.size());
+		System.out.println("list3 size: " + list3.size());
+		System.out.println("list size: " + list.size());
 		
-		for (int i = 0; i < list.size(); i++) {
-			Movie movie = list.get(i);
-			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate() + ", Fee: $" + movie.getFee());
-		}
+//		for (int i = 0; i < list.size(); i++) {
+//			Movie movie = list.get(i);
+//			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate() + ", Fee: $" + movie.getFee());
+//		}
 
 		
 		

@@ -14,6 +14,8 @@ public interface MovieSearchService {
 	public List<Movie> getGoldenHarvestMovies(SearchCriteria searchCriteria);
 
 	public List<Movie> getBroadwayMovies(SearchCriteria searchCriteria);
+	
+//	public List<Movie> getAMCMovies(SearchCriteria searchCriteria);
 
 	public List<Movie> getAllMovies();
 	
