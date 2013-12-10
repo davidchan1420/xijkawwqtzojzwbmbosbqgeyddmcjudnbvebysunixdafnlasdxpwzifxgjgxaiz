@@ -3,7 +3,7 @@ package movieservice.domain;
 import java.util.Date;
 
 public class Movie {
-	
+	//test
 	
 	private String movieName;
 	private String cinema;
