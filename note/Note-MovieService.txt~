@@ -36,7 +36,6 @@ UA 太古城中心
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=7
 皇室戲院
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=10
-
 新光戲院大劇場
 http://www.cityline.com/chi/sunbeam/byCinemaStep2.jsp?venueKey=12
 BEA IMAX @ UA iSQUARE
@@ -61,6 +60,7 @@ UA 東薈城
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=6
 元朗戲院
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=21
+
 UA 銀河影院 (澳門)
 http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=20
 
@@ -69,6 +69,9 @@ http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=20
 
 	<a href="./byMovieStep2.jsp?eventKey=">
 		<font class="row">電影名稱</font>
+
+<OPTION VALUE = "1847269">Sat, Dec 14, 10:10 PM&nbsp;&nbsp;Hitchcock&nbsp;&nbsp;&nbsp;&nbsp;$175.00</OPTION>
+<OPTION VALUE = "1846963">Fri, Dec 13, 09:10 PM&nbsp;&nbsp;Hitchcock&nbsp;&nbsp;&nbsp;&nbsp;$200.00</OPTION>
 
 	<select class="movie_selector" >
 		<option >Fri, Nov 01, 09:10 AM  House 1    $45.00</option>

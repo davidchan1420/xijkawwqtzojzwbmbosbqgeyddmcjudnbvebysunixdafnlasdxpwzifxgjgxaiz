@@ -8,6 +8,13 @@ public class CoordinateUA extends Coordinate {
 	private static final String URL_UA_CHI = "http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=";
 	private static final String URL_UA_ENG = "http://www.cityline.com/eng/movie/byCinemaStep2.jsp?venueKey=";
 
+	
+	// For Comparison
+	public CoordinateUA(String cinema) {
+		this.cinemaChinese = cinema;
+		this.cinemaEnglish = cinema;
+	}
+	
 	// Constructor
 	public CoordinateUA(String cinemaChinese, String cinemaEnglish, String venueKey, Double x, Double y) {
 		this.cinemaChinese = cinemaChinese;

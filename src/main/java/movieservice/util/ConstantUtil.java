@@ -45,12 +45,20 @@ public class ConstantUtil {
 		listCinemaUA.add(new CoordinateUA("UA Director's Club", "UA Director's Club", "11", 22.286528D, 114.217421D));
 		listCinemaUA.add(new CoordinateUA("UA 太古城中心", "UA Cityplaza", "7", 22.286528D, 114.217421D));
 		listCinemaUA.add(new CoordinateUA("皇室戲院", "Windsor Cinema", "10", 22.280608D, 114.186774D));
-		listCinemaUA.add(new CoordinateUA("新光戲院大劇場", "Sunbeam Theatre", "12", 22.29128D, 114.199963D));
+		listCinemaUA.add(new CoordinateUA("新光戲院大劇場", "Sunbeam Theatre", "12", 22.29128D, 114.199963D));		
+		listCinemaUA.add(new CoordinateUA("BEA IMAX @ UA iSQUARE", "BEA IMAX @ UA iSQUARE", "19", 22.297033D, 114.17188D));
+		listCinemaUA.add(new CoordinateUA("BEA IMAX @ UA MegaBox", "BEA IMAX @ UA MegaBox", "15", 22.319813D, 114.208741D));
+		listCinemaUA.add(new CoordinateUA("UA 朗豪坊", "UA Langham Place", "9", 22.317565D, 114.168779D));		
+		listCinemaUA.add(new CoordinateUA("UA iSQUARE", "UA iSQUARE", "18", 22.297033D, 114.17188D));		
+		listCinemaUA.add(new CoordinateUA("UA MegaBox", "UA MegaBox", "14", 22.319813D, 114.208741D));		
+		listCinemaUA.add(new CoordinateUA("影藝戲院", "Cine-Art House", "8", 22.324018D, 114.21704D));		
+		listCinemaUA.add(new CoordinateUA("機場 UA IMAX 影院", "UA IMAX Theatre @ Airport", "22", 22.317103D, 113.937508D));		
+		listCinemaUA.add(new CoordinateUA("UA 沙田", "UA Shatin", "1", 22.380732D, 114.188147D));		
+		listCinemaUA.add(new CoordinateUA("UA 屯門市廣場", "UA tmtplaza", "17", 22.393452D, 113.976591D));
+		listCinemaUA.add(new CoordinateUA("UA 東薈城", "UA Citygate", "6", 22.28957D, 113.940351D));
+		listCinemaUA.add(new CoordinateUA("元朗戲院", "Yuen Long Cinema", "21", 22.445672D, 114.028961D));
 		
-		listCinemaUA.add(new CoordinateUA("", "", "", , ));
-		
-//		listCinemaUA.add(new CoordinateUA("", "", "", , ));
-		
+//		listCinemaUA.add(new CoordinateUA("", "", "", , ));		
 	}
 	
 	

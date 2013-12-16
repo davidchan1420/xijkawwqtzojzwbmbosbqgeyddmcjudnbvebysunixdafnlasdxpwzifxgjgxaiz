@@ -8,17 +8,17 @@ public class Coordinate {
 
 	public Coordinate(){}
 	
-	// For Testing
+	// For Comparison
 	public Coordinate(String cinema) {
 		this.cinemaChinese = cinema;
 		this.cinemaEnglish = cinema;
 	}
 
 	// For Testing
-	public Coordinate(String cinemaChinese, String cinemaEnglish) {
-		this.cinemaChinese = cinemaChinese;
-		this.cinemaEnglish = cinemaEnglish;
-	}
+//	public Coordinate(String cinemaChinese, String cinemaEnglish) {
+//		this.cinemaChinese = cinemaChinese;
+//		this.cinemaEnglish = cinemaEnglish;
+//	}
 
 	// Constructor
 	public Coordinate(String cinemaChinese, String cinemaEnglish, Double x, Double y) {
