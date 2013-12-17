@@ -10,6 +10,7 @@ public class CoordinateTheGrand extends Coordinate {
 	
 	//TODO: We don't open this URL to get the fee because it will greatly slow down the speed
 //	public static final String URL_FEE_CHI = "https://www.thegrandcinema.com.hk/visSelectTickets.aspx?visLang=1&cinemacode=009&txtSessionId=";
+//	public static final String URL_FEE_ENG = "https://www.thegrandcinema.com.hk/visSelectTickets.aspx?visLang=2&cinemacode=009&txtSessionId=";
 	
 	
 	// For Comparison

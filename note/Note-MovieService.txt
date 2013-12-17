@@ -37,17 +37,11 @@ http://www.thegrandcinema.com.hk/index.aspx?visLang=2
 https://www.thegrandcinema.com.hk/visSelectTickets.aspx?visLang=1&cinemacode=009&txtSessionId=153473
 https://www.thegrandcinema.com.hk/visSelectTickets.aspx?visLang=2&cinemacode=009&txtSessionId=153281
 
-<a href="/movie_content.aspx?visMovie=2252" class="mcl_moviename_sessionname2">3D 魔雪奇緣(粵語版)</a>
-<a href="/movie_content.aspx?visMovie=2224" class="mcl_moviename_sessionname2">教父 - 電影節發燒友</a>
+	<a href="/movie_content.aspx?visMovie=2252" class="mcl_moviename_sessionname2">電影名稱</a>
 
-<option value="153490">星期日, 1月 26日, 05:05PM 4 院</option>
-<option value="153281">星期一, 12月 16日, 08:10PM 1 院</option>
+		<option value="153490">星期日, 1月 26日, 05:05PM 4 院</option>
+		<option value="152175">Mon, Feb 17, 07:30PM House 1</option>
 
-<a href="/movie_content.aspx?visMovie=2252&amp;visLang=2" class="mcl_moviename_sessionname2">3D Frozen(Can Ver)</a>
-<a href="/movie_content.aspx?visMovie=2224&amp;visLang=2" class="mcl_moviename_sessionname2">Godfather, The - HKIFF Cine Fan</a>
-
-<option value="152175">Mon, Feb 17, 07:30PM House 1</option>
-<option value="152174">Sat, Jan 11, 02:00PM House 1</option>
 
 ####################   UA Cinema   ####################
 UA Director's Club
