@@ -7,11 +7,10 @@ public class ConstantUtil {
 	public static final String LANG_CHI = "CHI";
 	public static final String LANG_ENG = "ENG";	
 	private static final String MCL = "MCL";
-	
-
-	
+		
 	//public static HashMap<String, ArrayList<Coordinate>> mapCinema = new HashMap<String, ArrayList<Coordinate>>();
 	public static final ArrayList<Coordinate> listCinema = new ArrayList<Coordinate>();
+	public static final ArrayList<CoordinateTheGrand> listCinemaTheGrand = new ArrayList<CoordinateTheGrand>();	
 	public static final ArrayList<CoordinateUA> listCinemaUA = new ArrayList<CoordinateUA>();		
 	
 	static{
@@ -21,6 +20,8 @@ public class ConstantUtil {
 		listCinema.add(new Coordinate("MCL 將軍澳戲院 (寶琳站)", "MCL Metro Cinema (Po Lam Station)", 22.323244D, 114.258037D));		
 		listCinema.add(new Coordinate("MCL 德福戲院", "MCL Telford Cinema", 22.322882D, 114.212257D));		
 		listCinema.add(new Coordinate("STAR Cinema (將軍澳站)", "STAR Cinema (Tseung Kwan O Station)", 22.308468D, 114.260551D));
+		
+		listCinemaTheGrand.add(new CoordinateTheGrand("The Grand Cinema", "The Grand Cinema", 22.304776D, 114.161789D));
 		
 		listCinema.add(new Coordinate("海運戲院 (超巨幕)", "Grand Ocean (Xtreme)", 22.295256D, 114.169377D));		
 		listCinema.add(new Coordinate("嘉禾港威", "Golden Gateway", 22.299378D, 114.167961D));		

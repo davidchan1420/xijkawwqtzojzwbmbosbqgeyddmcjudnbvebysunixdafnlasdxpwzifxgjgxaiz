@@ -8,6 +8,8 @@ import movieservice.domain.SearchCriteria;
 public interface MovieSearchService {
 
 	public List<Movie> getMCLMovies(SearchCriteria searchCriteria);
+	
+	public List<Movie> getTheGrandMovies(SearchCriteria searchCriteria);
 
 	public List<Movie> getUAMovies(SearchCriteria searchCriteria);
 
@@ -15,7 +17,7 @@ public interface MovieSearchService {
 
 	public List<Movie> getBroadwayMovies(SearchCriteria searchCriteria);
 	
-//	public List<Movie> getAMCMovies(SearchCriteria searchCriteria);
+	public List<Movie> getAMCMovies(SearchCriteria searchCriteria);
 
 	public List<Movie> getAllMovies();
 	
