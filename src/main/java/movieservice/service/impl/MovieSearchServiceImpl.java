@@ -726,7 +726,7 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 //		List<Movie> list4 = instance.getBroadwayMovies(searchCriteria);
 //		list.addAll(list4);
 //		List<Movie> list5 = instance.getUAMovies(searchCriteria);
-//		list.addAll(list5);
+//		list.addAll(list5);b
 		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
 		list.addAll(list6);
 		
