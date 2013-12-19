@@ -143,10 +143,21 @@ http://www.cinema.com.hk/revamp/html/movie_ticketing.php?lang=e&mode=ticketing
 		<option >02/11 11:05AM (Sat)  3院*  $65</option>
 	</select>
 
+####################   AMC   ####################
+Chinese Version:
+http://www.amccinemas.com.hk/tkting_upcoming.php?lang=c&mode=ticketing
+English Version:
+http://www.amccinemas.com.hk/tkting_upcoming.php?lang=e&mode=ticketing
 
 
+								2D 哈比人 – 荒谷魔龍						
+								3D 火雞反擊戰 (英語版)						
 
+<a href="cinema_every.php?lang=c&cinema_id=16" class="leftnav">AMC Pacific Place</a>
+<a href="cinema_every.php?lang=c&cinema_id=15" class="leftnav">AMC 又一城</a>
 
+<option value='17131894'>19/12 07:10PM (Thu)  2院 $140</option>
+<option value='18098172'>20/12 10:20AM (Fri)  1院 $115</option>
 
 
 

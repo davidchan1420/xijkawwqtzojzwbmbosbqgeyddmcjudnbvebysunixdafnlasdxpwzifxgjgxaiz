@@ -33,6 +33,7 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 	private static final String CONSTANT_THE_GRAND = "THE_GRAND";
 	private static final String CONSTANT_GOLDEN_HARVEST = "GOLDEN HARVEST";
 	private static final String CONSTANT_BROADWAY = "BROADWAY";
+	private static final String CONSTANT_AMC = "AMC";
 
 	private static HashMap<String, HashMap<String, String>> mapURL = new HashMap<String, HashMap<String, String>>();
 	private static HashMap<String, HashMap<String, Integer>> mapMonth = new HashMap<String, HashMap<String, Integer>>();
@@ -59,6 +60,11 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 		urlBroadway.put(ConstantUtil.LANG_CHI, "http://www.cinema.com.hk/revamp/html/movie_ticketing.php?lang=c&mode=ticketing");
 		urlBroadway.put(ConstantUtil.LANG_ENG, "http://www.cinema.com.hk/revamp/html/movie_ticketing.php?lang=e&mode=ticketing");
 		mapURL.put(CONSTANT_BROADWAY, urlBroadway);
+		
+		HashMap<String, String> urlAMC = new HashMap<String, String>();
+		urlAMC.put(ConstantUtil.LANG_CHI, "http://www.amccinemas.com.hk/tkting_upcoming.php?lang=c&mode=ticketing");
+		urlAMC.put(ConstantUtil.LANG_ENG, "http://www.amccinemas.com.hk/tkting_upcoming.php?lang=e&mode=ticketing");
+		mapURL.put(CONSTANT_AMC, urlAMC);
 		
 		
 		HashMap<String, Integer> monthChi = new HashMap<String, Integer>();
@@ -96,6 +102,7 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 		mapAPM.put("PM", Calendar.PM);
 	}
 
+	//TODO: Check if MCL Chi Month is 1 or 01 !!!!!!!!
 	public List<Movie> getMCLMovies(SearchCriteria searchCriteria) {
 		URL url;
 		BufferedReader in;
@@ -253,10 +260,9 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 						}
 						movie.setShowingDate(calMovie.getTime());
 						
-						//TODO: We don't open this URL to get the fee because it will greatly slow down the speed
-						//TODO: Use both Chi and Eng version (Blocked by filter in English version)						
+						//TODO: We don't open this URL to get the fee because it will greatly slow down the speed						
 //						StringBuilder sb = new StringBuilder();
-//						sb.append(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? CoordinateTheGrand.URL_FEE_CHI : CoordinateTheGrand.URL_FEE_CHI);
+//						sb.append(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? CoordinateTheGrand.URL_FEE_CHI : CoordinateTheGrand.URL_FEE_ENG);
 //						sb.append(matTime.group(1));						
 //						URL urlFee = new URL(sb.toString());
 //						System.out.println(urlFee.toExternalForm());
@@ -568,8 +574,130 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 
 	@Override
 	public List<Movie> getAMCMovies(SearchCriteria searchCriteria) {
-		// TODO Auto-generated method stub
-		return null;
+
+		
+		URL url;
+		BufferedReader in;
+		String inputLine;
+		String regPreMovieName = "<td width=\"34%\" valign=\"top\">";
+		String regMovieName = "\t{8}(.+?)\t{6}";
+		
+		String regPreCinema = "<font color=\"#575555\">";		
+		String regCinema = "<a href=\".+?\" class=\".+?\">(.+?)</a>";
+
+		HashMap<String, String> mapRegTime = new HashMap<String, String>();
+		mapRegTime.put(ConstantUtil.LANG_CHI, "<option value=.+?>(\\d{2})/(\\d{2})\\s(\\d{2}):(\\d{2})(\\w{2}).+?\\$(\\d{2,3})</option>");
+		mapRegTime.put(ConstantUtil.LANG_ENG, "<option value=.+?>(\\d{2})/(\\d{2})\\s(\\d{2}):(\\d{2})(\\w{2}).+?\\$(\\d{2,3})</option>");	
+		
+		String regPostTime = "</select>";
+		
+		List<Movie> listMovie = new ArrayList<Movie>();
+		try {
+			url = new URL(mapURL.get(CONSTANT_AMC).get(searchCriteria.getLanguage()));
+			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
+
+			String movieName = null;
+			String cinema = null;
+			Double relativeDistance = null;
+			
+			while ((inputLine = in.readLine()) != null) {
+//				System.out.println(inputLine);
+				
+				Pattern patPreMovieName = Pattern.compile(regPreMovieName);
+				Matcher matPreMovieName = patPreMovieName.matcher(inputLine);
+				if (matPreMovieName.find()) {
+
+					inputLine = in.readLine();
+					Pattern patMovieName = Pattern.compile(regMovieName);
+					Matcher matMovieName = patMovieName.matcher(inputLine);
+					if (matMovieName.find()) {
+						System.out.println(matMovieName.group(1));
+						movieName = matMovieName.group(1);
+					}					
+				}				
+
+				Pattern patPreCinema = Pattern.compile(regPreCinema);
+				Matcher matPreCinema = patPreCinema.matcher(inputLine);
+				
+				if(matPreCinema.find()){
+					
+					inputLine = in.readLine();					
+					Pattern patCinema = Pattern.compile(regCinema);
+					Matcher matCinema = patCinema.matcher(inputLine);
+										
+					if (matCinema.find()) {
+						
+						System.out.println("\t"+matCinema.group(1));
+						cinema = matCinema.group(1);
+						
+						// Calculate Relative Distance for each Cinema
+						if(searchCriteria.getDistanceRange() != null){						
+							int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));
+							
+							if(index > -1){
+								Coordinate coordinate = ConstantUtil.listCinema.get(index);
+								relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
+							}
+						}
+						
+						while ((inputLine = in.readLine()) != null) {
+						
+							Pattern patPostTime = Pattern.compile(regPostTime);
+							Matcher matPostTime = patPostTime.matcher(inputLine);
+						
+							if(!matPostTime.find()){
+								
+								Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
+								Matcher matTime = patTime.matcher(inputLine);
+								if (matTime.find()) {
+									System.out.println("\t\t"+matTime.group(1)+"/"+matTime.group(2)+" "+matTime.group(3)+":"+matTime.group(4)+" "+matTime.group(5)+" $"+matTime.group(6));
+									Movie movie = new Movie();
+									movie.setMovieName(movieName);
+									movie.setCinema(cinema);
+									movie.setRelativeDistance(relativeDistance);
+
+									Calendar calMovie = CalendarUtil.getSystemCalendar();
+									
+									calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(1)));
+									calMovie.set(Calendar.MONTH, Integer.parseInt(matTime.group(2)) - 1);
+									
+									Integer hour = Integer.parseInt(matTime.group(3));					
+									calMovie.set(Calendar.HOUR, hour==12 ? 0 : hour);
+									calMovie.set(Calendar.MINUTE, Integer.parseInt(matTime.group(4)));
+									calMovie.set(Calendar.AM_PM, mapAPM.get(matTime.group(5)));
+			
+									Calendar calToday = CalendarUtil.getSystemCalendar();
+			
+									// If Today's month is December And the Movie's showing month is January (Next Year), set the showing year to year + 1
+									if ((calToday.get(Calendar.MONTH) == Calendar.DECEMBER) && (calMovie.get(Calendar.MONTH) == Calendar.JANUARY)) {
+										calMovie.add(Calendar.YEAR, 1);
+									}
+									movie.setShowingDate(calMovie.getTime());
+									
+									movie.setFee(Integer.parseInt(matTime.group(6)));
+									listMovie.add(movie);					
+								}								
+							}else{
+								break;
+							}
+						}						
+						
+					}					
+
+				}
+				
+			}
+			in.close();						
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return listMovie;		
+		
 	}	
 	
 	public List<Movie> getAllMovies() {
@@ -580,27 +708,27 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 	public static void main(String[] args) {
 
 		SearchCriteria searchCriteria = new SearchCriteria();
-		searchCriteria.setLanguage("CHI");
-//		searchCriteria.setLanguage("ENG");
+//		searchCriteria.setLanguage("CHI");
+		searchCriteria.setLanguage("ENG");
 		searchCriteria.setDistanceRange(5000);
 		searchCriteria.setX(22.3291015D);
 		searchCriteria.setY(114.1882631D);
 		
 		MovieSearchServiceImpl instance = new MovieSearchServiceImpl();
-		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-		List<Movie> list3 = instance.getGoldenHarvestMovies(searchCriteria);
-		List<Movie> list4 = instance.getBroadwayMovies(searchCriteria);
-		List<Movie> list5 = instance.getUAMovies(searchCriteria);
-				
-		
 		List<Movie> list = new ArrayList<Movie>();
 		
-		list.addAll(list1);
-		list.addAll(list2);
-		list.addAll(list3);
-		list.addAll(list4);
-		list.addAll(list5);	
+//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+//		list.addAll(list1);
+//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+//		list.addAll(list2);
+//		List<Movie> list3 = instance.getGoldenHarvestMovies(searchCriteria);
+//		list.addAll(list3);
+//		List<Movie> list4 = instance.getBroadwayMovies(searchCriteria);
+//		list.addAll(list4);
+//		List<Movie> list5 = instance.getUAMovies(searchCriteria);
+//		list.addAll(list5);
+		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
+		list.addAll(list6);
 		
 		
 //		System.out.println("list1 size: " + list1.size());
@@ -608,12 +736,12 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 //		System.out.println("list3 size: " + list3.size());
 		
 		
-		for (int i = 0; i < list.size(); i++) {
-			Movie movie = list.get(i);
-			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate() + ", Fee: $" + movie.getFee());
-		}
-
-		System.out.println("list size: " + list.size());		
+//		for (int i = 0; i < list.size(); i++) {
+//			Movie movie = list.get(i);
+//			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate() + ", Fee: $" + movie.getFee());
+//		}
+//
+//		System.out.println("list size: " + list.size());		
 		
 	}
 
