@@ -37,10 +37,12 @@ public class ConstantUtil {
 		listCinema.add(new Coordinate("旺角", "MONGKOK", 22.317116D, 114.170627D));		
 		listCinema.add(new Coordinate("PALACE  apm", "PALACE  apm", 22.312299D, 114.225355D));		
 		listCinema.add(new Coordinate("葵芳", "KWAI FONG", 22.357456D, 114.126156D));	
-		listCinema.add(new Coordinate("荃灣", "TSUEN WAN", 22.37124D, 114.111039D));
-		
+		listCinema.add(new Coordinate("荃灣", "TSUEN WAN", 22.37124D, 114.111039D));		
 		listCinema.add(new Coordinate("元朗", "元朗", 22.445632D, 114.035822D));	//Reserved till 2013-03-06		
-		listCinema.add(new Coordinate("嘉湖銀座", "KINGSWOOD GINZA", 22.457246D, 114.004021D));		
+		listCinema.add(new Coordinate("嘉湖銀座", "KINGSWOOD GINZA", 22.457246D, 114.004021D));
+		
+		listCinema.add(new Coordinate("AMC 又一城", "AMC Festival Walk", 22.337535D, 114.173725D));		
+		listCinema.add(new Coordinate("AMC Pacific Place", "AMC Pacific Place", 22.277414D, 114.166308D));		
 //		listCinema.add(new Coordinate("", "", , ));
 		
 		listCinemaUA.add(new CoordinateUA("UA Director's Club", "UA Director's Club", "11", 22.286528D, 114.217421D));
