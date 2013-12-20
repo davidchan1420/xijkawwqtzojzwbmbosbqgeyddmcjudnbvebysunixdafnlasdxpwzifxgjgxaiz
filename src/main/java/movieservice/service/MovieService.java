@@ -5,7 +5,7 @@ import java.util.List;
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
 
-public interface MovieSearchService {
+public interface MovieService {
 
 	public List<Movie> getMCLMovies(SearchCriteria searchCriteria);
 	
@@ -19,6 +19,8 @@ public interface MovieSearchService {
 	
 	public List<Movie> getAMCMovies(SearchCriteria searchCriteria);
 
-	public List<Movie> getAllMovies();
+	public List<Movie> getAllMovies(SearchCriteria searchCriteria);
+	
+
 	
 }

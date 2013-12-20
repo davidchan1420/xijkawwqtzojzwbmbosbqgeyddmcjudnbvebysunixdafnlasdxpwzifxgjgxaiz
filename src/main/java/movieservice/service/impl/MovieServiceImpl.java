@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
-import movieservice.service.MovieSearchService;
+import movieservice.service.MovieService;
 import movieservice.util.CalendarUtil;
 import movieservice.util.ConstantUtil;
 import movieservice.util.Coordinate;
@@ -23,12 +23,8 @@ import movieservice.util.CoordinateTheGrand;
 import movieservice.util.CoordinateUA;
 import movieservice.util.MovieUtil;
 
-public class MovieSearchServiceImpl implements MovieSearchService {
+public class MovieServiceImpl implements MovieService {
 
-//	private static final String urlMCLChi = "http://www2.mclcinema.com/visMovieSelect.aspx?visLang=1";
-//	private static final String urlMCLEng = "http://www2.mclcinema.com/visMovieSelect.aspx?visLang=2";
-//	private List<Movie> listMovie = new ArrayList<Movie>();
-	
 	private static final String CONSTANT_MCL = "MCL";
 	private static final String CONSTANT_THE_GRAND = "THE_GRAND";
 	private static final String CONSTANT_GOLDEN_HARVEST = "GOLDEN HARVEST";
@@ -680,29 +676,9 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 		
 	}	
 	
-	public List<Movie> getAllMovies() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private static void checkNextYear(final Calendar calToday, Calendar calMovie){		
-		// If Today's month is December And the Movie's showing month is NOT December (Must be any month in next year then),
-		// set the showing year to year + 1
-		if ((calToday.get(Calendar.MONTH) == Calendar.DECEMBER) && (calMovie.get(Calendar.MONTH) != Calendar.DECEMBER)) {
-			calMovie.add(Calendar.YEAR, 1);
-		}
-	}
-	
-	public static void main(String[] args) {
-
-		SearchCriteria searchCriteria = new SearchCriteria();
-//		searchCriteria.setLanguage("CHI");
-		searchCriteria.setLanguage("ENG");
-		searchCriteria.setDistanceRange(5000);
-		searchCriteria.setX(22.3291015D);
-		searchCriteria.setY(114.1882631D);
+	public List<Movie> getAllMovies(SearchCriteria searchCriteria) {
 		
-		MovieSearchServiceImpl instance = new MovieSearchServiceImpl();
+		MovieServiceImpl instance = new MovieServiceImpl();
 		List<Movie> list = new ArrayList<Movie>();
 		
 		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
@@ -718,11 +694,31 @@ public class MovieSearchServiceImpl implements MovieSearchService {
 		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
 		list.addAll(list6);
 		
-		
 //		System.out.println("list1 size: " + list1.size());
 //		System.out.println("list2 size: " + list2.size());
-//		System.out.println("list3 size: " + list3.size());
+//		System.out.println("list3 size: " + list3.size());		
+		return list;		
+	}
+
+	private static void checkNextYear(final Calendar calToday, Calendar calMovie){		
+		// If Today's month is December And the Movie's showing month is NOT December (Must be any month in next year then),
+		// set the showing year to year + 1
+		if ((calToday.get(Calendar.MONTH) == Calendar.DECEMBER) && (calMovie.get(Calendar.MONTH) != Calendar.DECEMBER)) {
+			calMovie.add(Calendar.YEAR, 1);
+		}
+	}
+
+	public static void main(String[] args) {
+
+		SearchCriteria searchCriteria = new SearchCriteria();
+		searchCriteria.setLanguage("CHI");
+//		searchCriteria.setLanguage("ENG");
+		searchCriteria.setDistanceRange(5000);
+		searchCriteria.setX(22.3291015D);
+		searchCriteria.setY(114.1882631D);	
 		
+		MovieServiceImpl searchService = new MovieServiceImpl();
+		List<Movie> list = searchService.getAllMovies(searchCriteria);
 		
 		for (int i = 0; i < list.size(); i++) {
 			Movie movie = list.get(i);

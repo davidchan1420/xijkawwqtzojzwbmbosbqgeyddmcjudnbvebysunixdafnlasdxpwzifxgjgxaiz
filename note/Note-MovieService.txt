@@ -96,9 +96,6 @@ http://www.cityline.com/chi/movie/byCinemaStep2.jsp?venueKey=20
 		<option >Fri, Nov 01, 09:10 AM  House 1    $45.00</option>
 		<option >Sat, Nov 02, 09:00 AM  House 1    $45.00</option>
 	</select>
-####################   The Grand Cinema   ####################
-
-
 
 ####################   Golden Harvest   ####################
 
