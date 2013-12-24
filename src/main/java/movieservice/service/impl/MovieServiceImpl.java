@@ -683,16 +683,16 @@ public class MovieServiceImpl implements MovieService {
 		
 		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
 		list.addAll(list1);
-		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-		list.addAll(list2);
-		List<Movie> list3 = instance.getUAMovies(searchCriteria);
-		list.addAll(list3);		
-		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
-		list.addAll(list4);
-		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
-		list.addAll(list5);		
-		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
-		list.addAll(list6);
+//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+//		list.addAll(list2);
+//		List<Movie> list3 = instance.getUAMovies(searchCriteria);
+//		list.addAll(list3);		
+//		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
+//		list.addAll(list4);
+//		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
+//		list.addAll(list5);		
+//		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
+//		list.addAll(list6);
 		
 //		System.out.println("list1 size: " + list1.size());
 //		System.out.println("list2 size: " + list2.size());
