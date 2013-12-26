@@ -1,13 +1,17 @@
 package movieservice.domain;
 
+import java.util.Calendar;
+
 public class SearchCriteria {
 
 	private String language;
 	private String movieName;
-
+	private Calendar showingDate;
+	
 	private Double x;
 	private Double y;
 	private Integer distanceRange;
+		
 
 	public String getLanguage() {
 		return language;
@@ -23,6 +27,14 @@ public class SearchCriteria {
 
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
+	}
+
+	public Calendar getShowingDate() {
+		return showingDate;
+	}
+
+	public void setShowingDate(Calendar showingDate) {
+		this.showingDate = showingDate;
 	}
 
 	public Double getX() {

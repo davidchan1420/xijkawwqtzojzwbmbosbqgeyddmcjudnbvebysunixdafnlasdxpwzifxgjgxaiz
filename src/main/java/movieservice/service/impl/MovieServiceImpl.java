@@ -8,7 +8,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -155,9 +154,11 @@ public class MovieServiceImpl implements MovieService {
 					movie.setRelativeDistance(relativeDistance);
 
 					Calendar calMovie = CalendarUtil.getSystemCalendar();
-					calMovie.set(Calendar.MONTH, mapMonth.get(searchCriteria.getLanguage()).get(matTime.group(2)));
-					calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(3)));
-					calMovie.set(Calendar.HOUR, Integer.parseInt(matTime.group(4)));
+					calMovie.set(Calendar.MONTH, mapMonth.get(searchCriteria.getLanguage()).get(matTime.group(2)));					
+					calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(3)));					
+					
+					Integer hour = Integer.parseInt(matTime.group(4));					
+					calMovie.set(Calendar.HOUR, hour==12 ? 0 : hour);					
 					calMovie.set(Calendar.MINUTE, Integer.parseInt(matTime.group(5)));
 					calMovie.set(Calendar.SECOND, 0);
 					calMovie.set(Calendar.AM_PM, mapAPM.get(matTime.group(6)));
@@ -166,10 +167,11 @@ public class MovieServiceImpl implements MovieService {
 
 					checkNextYear(calToday, calMovie);
 
-					movie.setShowingDate(calMovie.getTime());
+					movie.setShowingDate(calMovie);
 					
 					movie.setFee(Integer.parseInt(matTime.group(7)));
 					listMovie.add(movie);
+//					System.out.println(calMovie);
 				}
 			}
 			in.close();
@@ -239,7 +241,9 @@ public class MovieServiceImpl implements MovieService {
 						Calendar calMovie = CalendarUtil.getSystemCalendar();
 						calMovie.set(Calendar.MONTH, mapMonth.get(searchCriteria.getLanguage()).get(matTime.group(2)));
 						calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(3)));
-						calMovie.set(Calendar.HOUR, Integer.parseInt(matTime.group(4)));
+						
+						Integer hour = Integer.parseInt(matTime.group(4));					
+						calMovie.set(Calendar.HOUR, hour==12 ? 0 : hour);						
 						calMovie.set(Calendar.MINUTE, Integer.parseInt(matTime.group(5)));
 						calMovie.set(Calendar.SECOND, 0);
 						calMovie.set(Calendar.AM_PM, mapAPM.get(matTime.group(6)));
@@ -248,7 +252,7 @@ public class MovieServiceImpl implements MovieService {
 
 						checkNextYear(calToday, calMovie);
 						
-						movie.setShowingDate(calMovie.getTime());
+						movie.setShowingDate(calMovie);
 						
 						//TODO: We don't open this URL to get the fee because it will greatly slow down the speed						
 //						StringBuilder sb = new StringBuilder();
@@ -352,7 +356,7 @@ public class MovieServiceImpl implements MovieService {
 
 						checkNextYear(calToday, calMovie);
 						
-						movie.setShowingDate(calMovie.getTime());
+						movie.setShowingDate(calMovie);
 						
 						movie.setFee(Integer.parseInt(matTime.group(6)));
 						listMovie.add(movie);					
@@ -449,7 +453,7 @@ public class MovieServiceImpl implements MovieService {
 
 					checkNextYear(calToday, calMovie);
 					
-					movie.setShowingDate(calMovie.getTime());
+					movie.setShowingDate(calMovie);
 					
 					movie.setFee(Integer.parseInt(matTime.group(6)));
 					listMovie.add(movie);					
@@ -537,7 +541,7 @@ public class MovieServiceImpl implements MovieService {
 					
 					checkNextYear(calToday, calMovie);
 
-					movie.setShowingDate(calMovie.getTime());
+					movie.setShowingDate(calMovie);
 					
 					movie.setFee(Integer.parseInt(matTime.group(6)));
 					listMovie.add(movie);					
@@ -651,7 +655,7 @@ public class MovieServiceImpl implements MovieService {
 			
 									checkNextYear(calToday, calMovie);
 									
-									movie.setShowingDate(calMovie.getTime());
+									movie.setShowingDate(calMovie);
 									
 									movie.setFee(Integer.parseInt(matTime.group(6)));
 									listMovie.add(movie);					

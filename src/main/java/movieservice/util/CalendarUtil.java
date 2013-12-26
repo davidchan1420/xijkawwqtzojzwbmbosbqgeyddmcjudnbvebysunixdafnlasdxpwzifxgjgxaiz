@@ -46,27 +46,27 @@ public class CalendarUtil {
 		return getSystemCalendar().getTimeInMillis();
 	}
 
-	public static Date getTrimDayToMin(Date date) {
+	public static Calendar trimDayToMin(Date date) {
 		Calendar c = getSystemCalendar();
 		c.setTime(date);
 		c.set(Calendar.HOUR_OF_DAY, 0);
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
-		return c.getTime();
+		return c;
 	}
 
-	public static Date getTrimDayToMax(Date date) {
+	public static Calendar trimDayToMax(Date date) {
 		Calendar c = getSystemCalendar();
 		c.setTime(date);
 		c.set(Calendar.HOUR_OF_DAY, 23);
 		c.set(Calendar.MINUTE, 59);
 		c.set(Calendar.SECOND, 59);
 		c.set(Calendar.MILLISECOND, 999);
-		return c.getTime();
+		return c;
 	}
 
-	public static Date getTrimMonthToMin(Date date) {
+	public static Calendar trimMonthToMin(Date date) {
 		Calendar c = getSystemCalendar();
 		c.setTime(date);
 		c.set(Calendar.DATE, 1);
@@ -74,10 +74,10 @@ public class CalendarUtil {
 		c.set(Calendar.MINUTE, 0);
 		c.set(Calendar.SECOND, 0);
 		c.set(Calendar.MILLISECOND, 0);
-		return c.getTime();
+		return c;
 	}
 
-	public static Date getTrimMonthToMax(Date date) {
+	public static Date trimMonthToMax(Date date) {
 		Calendar c = getSystemCalendar();
 		c.setTime(date);
 		int maxDayOfMonth = c.getActualMaximum(Calendar.DAY_OF_MONTH);

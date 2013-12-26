@@ -1,12 +1,12 @@
 package movieservice.domain;
 
-import java.util.Date;
+import java.util.Calendar;
 
 public class Movie {
 	
 	private String movieName;
 	private String cinema;
-	private Date showingDate;
+	private Calendar showingDate;
 	private Integer fee;
 	private Double relativeDistance;
 	
@@ -29,10 +29,10 @@ public class Movie {
 //		this.showingDate = showingDate;
 //	}
 
-	public Date getShowingDate() {
+	public Calendar getShowingDate() {
 		return showingDate;
 	}
-	public void setShowingDate(Date showingDate) {
+	public void setShowingDate(Calendar showingDate) {
 		this.showingDate = showingDate;
 	}
 	public Integer getFee() {

@@ -1,11 +1,14 @@
 package movieservice.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
 import movieservice.service.SearchService;
+import movieservice.util.CalendarUtil;
 
 public class SearchServiceImpl implements SearchService {
 
@@ -24,11 +27,14 @@ public class SearchServiceImpl implements SearchService {
 		
 		List<Movie> result = new ArrayList<Movie>(movies);
 
+		List<Movie> times = filterByTime(searchCriteria, result);
+		result.retainAll(times);
+		
 		List<Movie> names = filterByName(searchCriteria, result);
 		result.retainAll(names);
 		
 		List<Movie> distances = filterByDistance(searchCriteria, result);
-		result.retainAll(distances);
+		result.retainAll(distances);			
 		
 		return result;
 	}
@@ -80,19 +86,35 @@ public class SearchServiceImpl implements SearchService {
 
 	@Override
 	public List<Movie> filterByTime(SearchCriteria searchCriteria, List<Movie> movies) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Movie> result = new ArrayList<Movie>();
+		
+		Calendar searchDate = searchCriteria.getShowingDate();		
+		
+		for(int i=0; i<movies.size(); i++){
+			Movie movie = movies.get(i);
+		
+			if(searchDate.after(movie.getShowingDate())){
+				result.add(movie);
+			}
+		}
+		
+		return result;
 	}
 
 	public static void main(String[] args) {
 
 		SearchCriteria searchCriteria = new SearchCriteria();
-		searchCriteria.setLanguage("CHI");
-//		searchCriteria.setLanguage("ENG");
-		searchCriteria.setDistanceRange(7);
+//		searchCriteria.setLanguage("CHI");
+		searchCriteria.setLanguage("ENG");		
 		searchCriteria.setX(22.3291015D);
-		searchCriteria.setY(114.1882631D);	
-		searchCriteria.setMovieName(" 荒谷魔龍 ");
+		searchCriteria.setY(114.1882631D);
+		
+		Calendar searchDate = CalendarUtil.trimDayToMax(CalendarUtil.getSystemDate());
+		searchDate.add(Calendar.DATE, 1);
+		searchCriteria.setShowingDate(searchDate);		
+		searchCriteria.setDistanceRange(7);
+		searchCriteria.setMovieName("HoBBIT");
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> list = searchService.searchMovies(searchCriteria);
@@ -100,12 +122,28 @@ public class SearchServiceImpl implements SearchService {
 		
 		for (int i = 0; i < list.size(); i++) {
 			Movie movie = list.get(i);
-			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate() + ", Fee: $" + movie.getFee());
+			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
 		}
-
-		System.out.println("list size: " + list.size());		
+		System.out.println("list size: " + list.size());
 		
 	}
 
+//	public static void main(String[] args) {
+//		
+//		Date searchDate = CalendarUtil.getTrimDayToMax(CalendarUtil.getSystemDate());		
+//		System.out.println("Search Date in max: " + searchDate);
+//		
+//		Calendar searchCalendar = CalendarUtil.getSystemCalendar();
+//		searchCalendar.setTime(searchDate);
+//		
+//		Calendar showingDate = CalendarUtil.getSystemCalendar();
+//		showingDate.setTime(searchDate);		
+//		showingDate.add(Calendar.SECOND, 1);
+//		
+//		System.out.println("Showing Date is: " + showingDate.getTime());
+//		
+//		System.out.println("It is : " + (searchCalendar.after(showingDate.getTime()) ? true : false));
+//		
+//	}
 	
 }
