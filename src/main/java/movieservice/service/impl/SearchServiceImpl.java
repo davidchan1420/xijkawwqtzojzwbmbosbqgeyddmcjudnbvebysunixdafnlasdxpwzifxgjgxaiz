@@ -22,26 +22,31 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<Movie> filterMovies(SearchCriteria searchCriteria, List<Movie> movies) {
 		
-		List<Movie> result = new ArrayList<Movie>();
-		
-		if(searchCriteria.getMovieName() != null && searchCriteria.getMovieName().trim().length() > 0){
-			result = filterByName(searchCriteria, movies);
-		}
+		List<Movie> result = new ArrayList<Movie>(movies);
+
+		List<Movie> names = filterByName(searchCriteria, movies);
+		result.retainAll(names);
 		
 		return result;
 	}
 
 	@Override
-	public List<Movie> filterByName(SearchCriteria searchCriteria, final List<Movie> movies) {
-		
-		String movieName = searchCriteria.getMovieName();
+	public List<Movie> filterByName(SearchCriteria searchCriteria, final List<Movie> movies) {		
 		
 		List<Movie> result = new ArrayList<Movie>();
 		
+		if(searchCriteria.getMovieName() == null)
+			return result;
+		
+		String searchMovieName = searchCriteria.getMovieName().trim().toLowerCase();
+		if(searchMovieName.length() < 1)
+			return result;		
+		
 		for(int i=0; i<movies.size(); i++){
-			Movie movie = movies.get(i);
+			Movie movie = movies.get(i);			
 			//if(movie.getMovieName().equalsIgnoreCase(movieName)){
-			if(movie.getMovieName().toLowerCase().contains(movieName.toLowerCase())){
+			String movieName = movie.getMovieName().toLowerCase();
+			if(movieName.contains(searchMovieName)){
 				result.add(movie);				
 			}			
 		}
@@ -69,7 +74,7 @@ public class SearchServiceImpl implements SearchService {
 		searchCriteria.setDistanceRange(5000);
 		searchCriteria.setX(22.3291015D);
 		searchCriteria.setY(114.1882631D);	
-		searchCriteria.setMovieName("SuG");
+		searchCriteria.setMovieName(" 風起了 ");
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> list = searchService.searchMovies(searchCriteria);
