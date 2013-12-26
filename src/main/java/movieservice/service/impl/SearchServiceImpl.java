@@ -24,23 +24,26 @@ public class SearchServiceImpl implements SearchService {
 		
 		List<Movie> result = new ArrayList<Movie>(movies);
 
-		List<Movie> names = filterByName(searchCriteria, movies);
+		List<Movie> names = filterByName(searchCriteria, result);
 		result.retainAll(names);
+		
+		List<Movie> distances = filterByDistance(searchCriteria, result);
+		result.retainAll(distances);
 		
 		return result;
 	}
 
 	@Override
 	public List<Movie> filterByName(SearchCriteria searchCriteria, final List<Movie> movies) {		
-		
-		List<Movie> result = new ArrayList<Movie>();
-		
+					
 		if(searchCriteria.getMovieName() == null)
-			return result;
+			return movies;
 		
 		String searchMovieName = searchCriteria.getMovieName().trim().toLowerCase();
 		if(searchMovieName.length() < 1)
-			return result;		
+			return movies;		
+		
+		List<Movie> result = new ArrayList<Movie>();
 		
 		for(int i=0; i<movies.size(); i++){
 			Movie movie = movies.get(i);			
@@ -56,8 +59,23 @@ public class SearchServiceImpl implements SearchService {
 
 	@Override
 	public List<Movie> filterByDistance(SearchCriteria searchCriteria, List<Movie> movies) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(searchCriteria.getDistanceRange() == null)
+			return movies;
+		
+		List<Movie> result = new ArrayList<Movie>();
+		
+		Double searchDistance = searchCriteria.getDistanceRange().doubleValue();
+		
+		for(int i=0; i<movies.size(); i++){
+			Movie movie = movies.get(i);
+			Double relativeDistance = movie.getRelativeDistance();
+			if(relativeDistance <= searchDistance){
+				result.add(movie);
+			}			
+		}
+		
+		return result;
 	}
 
 	@Override
@@ -71,10 +89,10 @@ public class SearchServiceImpl implements SearchService {
 		SearchCriteria searchCriteria = new SearchCriteria();
 		searchCriteria.setLanguage("CHI");
 //		searchCriteria.setLanguage("ENG");
-		searchCriteria.setDistanceRange(5000);
+		searchCriteria.setDistanceRange(7);
 		searchCriteria.setX(22.3291015D);
 		searchCriteria.setY(114.1882631D);	
-		searchCriteria.setMovieName(" 風起了 ");
+		searchCriteria.setMovieName(" 荒谷魔龍 ");
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> list = searchService.searchMovies(searchCriteria);
