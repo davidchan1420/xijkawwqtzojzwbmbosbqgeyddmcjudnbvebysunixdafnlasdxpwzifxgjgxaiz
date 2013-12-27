@@ -2,11 +2,14 @@ package movieservice.domain;
 
 import java.util.Calendar;
 
+import movieservice.util.CalendarUtil;
+
 public class SearchCriteria {
 
 	private String language;
 	private String movieName;
-	private Calendar showingDate;
+	private Calendar showingDateMin;
+	private Calendar showingDateMax;
 	
 	private Double x;
 	private Double y;
@@ -29,13 +32,30 @@ public class SearchCriteria {
 		this.movieName = movieName;
 	}
 
-	public Calendar getShowingDate() {
-		return showingDate;
+	public void setShowingDate(Calendar showingDate){
+		
+		Calendar showingDateMax = CalendarUtil.trimDayToMax(showingDate.getTime());
+		this.showingDateMax = showingDateMax;
+		
+		Calendar showingDateMin = CalendarUtil.trimDayToMin(showingDate.getTime());
+		this.showingDateMin = showingDateMin;		
+	}
+	
+	public Calendar getShowingDateMin() {
+		return showingDateMin;
 	}
 
-	public void setShowingDate(Calendar showingDate) {
-		this.showingDate = showingDate;
+//	public void setShowingDateMin(Calendar showingDate) {
+//		this.showingDateMin = showingDate;
+//	}	
+
+	public Calendar getShowingDateMax() {
+		return showingDateMax;
 	}
+
+//	public void setShowingDateMax(Calendar showingDateMax) {
+//		this.showingDateMax = showingDateMax;
+//	}
 
 	public Double getX() {
 		return x;

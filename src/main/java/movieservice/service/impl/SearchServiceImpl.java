@@ -89,12 +89,13 @@ public class SearchServiceImpl implements SearchService {
 		
 		List<Movie> result = new ArrayList<Movie>();
 		
-		Calendar searchDate = searchCriteria.getShowingDate();		
+		Calendar searchDateMax = searchCriteria.getShowingDateMax();		
+		Calendar searchDateMin = searchCriteria.getShowingDateMin();
 		
 		for(int i=0; i<movies.size(); i++){
 			Movie movie = movies.get(i);
-		
-			if(searchDate.after(movie.getShowingDate())){
+			Calendar showingDate = movie.getShowingDate();
+			if(searchDateMax.after(showingDate) && searchDateMin.before(showingDate)){
 				result.add(movie);
 			}
 		}
@@ -105,16 +106,17 @@ public class SearchServiceImpl implements SearchService {
 	public static void main(String[] args) {
 
 		SearchCriteria searchCriteria = new SearchCriteria();
-//		searchCriteria.setLanguage("CHI");
-		searchCriteria.setLanguage("ENG");		
+		searchCriteria.setLanguage("CHI");
+//		searchCriteria.setLanguage("ENG");		
 		searchCriteria.setX(22.3291015D);
 		searchCriteria.setY(114.1882631D);
 		
-		Calendar searchDate = CalendarUtil.trimDayToMax(CalendarUtil.getSystemDate());
+		Calendar searchDate = CalendarUtil.getSystemCalendar();		
 		searchDate.add(Calendar.DATE, 1);
-		searchCriteria.setShowingDate(searchDate);		
+		searchCriteria.setShowingDate(searchDate);
+		
 		searchCriteria.setDistanceRange(7);
-		searchCriteria.setMovieName("HoBBIT");
+		searchCriteria.setMovieName("哈比人");
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> list = searchService.searchMovies(searchCriteria);
