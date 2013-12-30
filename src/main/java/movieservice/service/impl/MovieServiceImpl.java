@@ -97,7 +97,7 @@ public class MovieServiceImpl implements MovieService {
 		mapAPM.put("PM", Calendar.PM);
 	}
 
-	//TODO: Check if MCL Chi Month is 1 or 01 !!!!!!!!
+	//MCL Chi Month is 1,2,3,4,5
 	public List<Movie> getMCLMovies(SearchCriteria searchCriteria) {
 		URL url;
 		BufferedReader in;
@@ -106,7 +106,7 @@ public class MovieServiceImpl implements MovieService {
 		String regCinema = "<td class=\".+?\"><a class=\".+?\" href=\".+?\">(.+?)</a></td>.+";	
 		
 		HashMap<String, String> mapRegTime = new HashMap<String, String>();
-		mapRegTime.put(ConstantUtil.LANG_CHI, "<option value=\".+?\">(.+?),\\s(\\d{2}).{1}(\\d{2}).{1},\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3})</option>");
+		mapRegTime.put(ConstantUtil.LANG_CHI, "<option value=\".+?\">(.+?),\\s(\\d{1,2}).{1}(\\d{2}).{1},\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3})</option>");
 		mapRegTime.put(ConstantUtil.LANG_ENG, "<option value=\".+?\">(.+?),\\s(\\w{3})\\s(\\d{2}),\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3})</option>");
 		
 		List<Movie> listMovie = new ArrayList<Movie>();
@@ -116,7 +116,8 @@ public class MovieServiceImpl implements MovieService {
 
 			String movieName = null;
 			String cinema = null;
-			Double relativeDistance = null;
+//			Double relativeDistance = null;
+			Coordinate coordinate = null;
 			
 			while ((inputLine = in.readLine()) != null) {
 //				System.out.println(inputLine);
@@ -130,18 +131,17 @@ public class MovieServiceImpl implements MovieService {
 				Pattern patCinema = Pattern.compile(regCinema);
 				Matcher matCinema = patCinema.matcher(inputLine);				
 				if (matCinema.find()) {
-//					 System.out.println("\t"+matCinema.group(1));
+//					System.out.println("\t"+matCinema.group(1));
 					cinema = matCinema.group(1);
 					
 					// Calculate Relative Distance for each Cinema
-					if(searchCriteria.getDistanceRange() != null){						
-						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));
-						
+//					if(searchCriteria.getDistanceRange() != null){
+						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));						
 						if(index > -1){
-							Coordinate coordinate = ConstantUtil.listCinema.get(index);
-							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
+//							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
+							coordinate = ConstantUtil.listCinema.get(index);
 						}
-					}
+//					}
 				}
 				
 				Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
@@ -151,7 +151,11 @@ public class MovieServiceImpl implements MovieService {
 					Movie movie = new Movie();
 					movie.setMovieName(movieName);
 					movie.setCinema(cinema);
-					movie.setRelativeDistance(relativeDistance);
+					
+//					movie.setRelativeDistance(relativeDistance);
+//					movie.setX(coordinate.getX());
+//					movie.setY(coordinate.getY());
+					movie.setCoordinate(coordinate);					
 
 					Calendar calMovie = CalendarUtil.getSystemCalendar();
 					calMovie.set(Calendar.MONTH, mapMonth.get(searchCriteria.getLanguage()).get(matTime.group(2)));					
@@ -176,10 +180,7 @@ public class MovieServiceImpl implements MovieService {
 			}
 			in.close();
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -209,7 +210,7 @@ public class MovieServiceImpl implements MovieService {
 
 				String movieName = null;
 				String cinema = null;
-				Double relativeDistance = null;
+//				Double relativeDistance = null;
 //				System.out.println(url.toExternalForm());
 
 				while ((inputLine = in.readLine()) != null) {
@@ -224,9 +225,9 @@ public class MovieServiceImpl implements MovieService {
 					cinema = searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordTheGrand.getCinemaChinese() : coordTheGrand.getCinemaEnglish();
 						
 					// Calculate Relative Distance for The Grand Cinema
-					if (searchCriteria.getDistanceRange() != null) {
-						relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordTheGrand);
-					}
+//					if (searchCriteria.getDistanceRange() != null) {
+//						relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordTheGrand);
+//					}
 
 					Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
 					Matcher matTime = patTime.matcher(inputLine);
@@ -236,7 +237,8 @@ public class MovieServiceImpl implements MovieService {
 						Movie movie = new Movie();
 						movie.setMovieName(movieName);
 						movie.setCinema(cinema);
-						movie.setRelativeDistance(relativeDistance);
+//						movie.setRelativeDistance(relativeDistance);
+						movie.setCoordinate(coordTheGrand);						
 
 						Calendar calMovie = CalendarUtil.getSystemCalendar();
 						calMovie.set(Calendar.MONTH, mapMonth.get(searchCriteria.getLanguage()).get(matTime.group(2)));
@@ -269,16 +271,12 @@ public class MovieServiceImpl implements MovieService {
 						
 //						movie.setFee(Integer.parseInt(matTime.group(X)));
 						listMovie.add(movie);
-
 					}
 					
 				}
 				in.close();						
 
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				return null;
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
 			}
@@ -311,7 +309,7 @@ public class MovieServiceImpl implements MovieService {
 
 				String movieName = null;
 				String cinema = null;
-				Double relativeDistance = null;
+//				Double relativeDistance = null;
 //				System.out.println(url.toExternalForm());
 				while ((inputLine = in.readLine()) != null) {
 					
@@ -326,10 +324,9 @@ public class MovieServiceImpl implements MovieService {
 					cinema = searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordUA.getCinemaChinese() : coordUA.getCinemaEnglish();
 						
 					// Calculate Relative Distance for each Cinema
-					if(searchCriteria.getDistanceRange() != null){
-						
-						relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordUA);					
-					}				
+//					if(searchCriteria.getDistanceRange() != null){						
+//						relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordUA);					
+//					}				
 
 					Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
 					Matcher matTime = patTime.matcher(inputLine);
@@ -339,8 +336,9 @@ public class MovieServiceImpl implements MovieService {
 						Movie movie = new Movie();
 						movie.setMovieName(movieName);
 						movie.setCinema(cinema);
-						movie.setRelativeDistance(relativeDistance);
-	//
+//						movie.setRelativeDistance(relativeDistance);
+						movie.setCoordinate(coordUA);						
+
 						Calendar calMovie = CalendarUtil.getSystemCalendar();
 						
 						calMovie.set(Calendar.MONTH, mapMonth.get(ConstantUtil.LANG_ENG).get(matTime.group(1)));	//Both Chi and Eng version uses Eng month names						
@@ -364,10 +362,7 @@ public class MovieServiceImpl implements MovieService {
 				}
 				in.close();						
 
-			} catch (MalformedURLException e) {
-				e.printStackTrace();
-				return null;
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
 			}
@@ -386,8 +381,8 @@ public class MovieServiceImpl implements MovieService {
 		String regCinema = "<td width=\".+?\" align=\".+?\" nowrap class=\".+?\"><a class=\".+?\" href=\".+?\">(.+?)</a></td>";		
 
 		HashMap<String, String> mapRegTime = new HashMap<String, String>();
-		mapRegTime.put(ConstantUtil.LANG_CHI, "<option value=\".+?\">.+?,\\s(\\d{1,2}).{1}(\\d{1,2}).{1}\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3})</option>");
-		mapRegTime.put(ConstantUtil.LANG_ENG, "<option value=\".+?\">\\w{6,9},\\s(\\d{1,2})/(\\d{1,2})\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3})</option>");
+		mapRegTime.put(ConstantUtil.LANG_CHI, "<option value=\".+?\">.+?,\\s(\\d{1,2}).{1}(\\d{1,2}).{1}\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3}).*?</option>");
+		mapRegTime.put(ConstantUtil.LANG_ENG, "<option value=\".+?\">\\w{6,9},\\s(\\d{1,2})/(\\d{1,2})\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3}).*?</option>");
 		
 		List<Movie> listMovie = new ArrayList<Movie>();
 		try {
@@ -396,7 +391,8 @@ public class MovieServiceImpl implements MovieService {
 
 			String movieName = null;
 			String cinema = null;
-			Double relativeDistance = null;
+//			Double relativeDistance = null;
+			Coordinate coordinate = null;
 			
 			while ((inputLine = in.readLine()) != null) {
 //				System.out.println(inputLine);
@@ -414,14 +410,13 @@ public class MovieServiceImpl implements MovieService {
 					cinema = matCinema.group(1);
 					
 					// Calculate Relative Distance for each Cinema
-					if(searchCriteria.getDistanceRange() != null){						
-						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));
-						
+//					if(searchCriteria.getDistanceRange() != null){						
+						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));						
 						if(index > -1){
-							Coordinate coordinate = ConstantUtil.listCinema.get(index);
-							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
+							coordinate = ConstantUtil.listCinema.get(index);
+//							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
 						}
-					}					
+//					}					
 				}				
 
 				Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
@@ -431,16 +426,18 @@ public class MovieServiceImpl implements MovieService {
 					Movie movie = new Movie();
 					movie.setMovieName(movieName);
 					movie.setCinema(cinema);
-					movie.setRelativeDistance(relativeDistance);
-//
-					Calendar calMovie = CalendarUtil.getSystemCalendar();
+//					movie.setRelativeDistance(relativeDistance);
+					movie.setCoordinate(coordinate);					
+
+					Calendar calMovie = CalendarUtil.getSystemCalendar();					
 					
 					if(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI)){
-						calMovie.set(Calendar.MONTH, Integer.parseInt(matTime.group(1))-1);
+						calMovie.set(Calendar.MONTH, mapMonth.get(ConstantUtil.LANG_CHI).get(matTime.group(1)));						
 						calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(2)));	
+						
 					}else if(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_ENG)){
-						calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(1)));
-						calMovie.set(Calendar.MONTH, Integer.parseInt(matTime.group(2))-1);
+						calMovie.set(Calendar.MONTH, mapMonth.get(ConstantUtil.LANG_CHI).get(matTime.group(2)));						
+						calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(1)));							
 					}				
 					
 					Integer hour = Integer.parseInt(matTime.group(3));					
@@ -471,6 +468,7 @@ public class MovieServiceImpl implements MovieService {
 		return listMovie;
 	}
 
+	
 	public List<Movie> getBroadwayMovies(SearchCriteria searchCriteria) {		
 
 		URL url;
@@ -490,7 +488,8 @@ public class MovieServiceImpl implements MovieService {
 
 			String movieName = null;
 			String cinema = null;
-			Double relativeDistance = null;
+//			Double relativeDistance = null;
+			Coordinate coordinate = null;
 			
 			while ((inputLine = in.readLine()) != null) {
 //				System.out.println(inputLine);
@@ -508,14 +507,13 @@ public class MovieServiceImpl implements MovieService {
 					cinema = matCinema.group(1);
 					
 					// Calculate Relative Distance for each Cinema
-					if(searchCriteria.getDistanceRange() != null){						
-						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));
-						
+//					if(searchCriteria.getDistanceRange() != null){						
+						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));						
 						if(index > -1){
-							Coordinate coordinate = ConstantUtil.listCinema.get(index);
-							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
+							coordinate = ConstantUtil.listCinema.get(index);
+//							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
 						}
-					}					
+//					}					
 				}				
 
 				Pattern patTime = Pattern.compile(mapRegTime.get(searchCriteria.getLanguage()));
@@ -525,7 +523,8 @@ public class MovieServiceImpl implements MovieService {
 					Movie movie = new Movie();
 					movie.setMovieName(movieName);
 					movie.setCinema(cinema);
-					movie.setRelativeDistance(relativeDistance);
+//					movie.setRelativeDistance(relativeDistance);
+					movie.setCoordinate(coordinate);
 //
 					Calendar calMovie = CalendarUtil.getSystemCalendar();
 					
@@ -585,7 +584,8 @@ public class MovieServiceImpl implements MovieService {
 
 			String movieName = null;
 			String cinema = null;
-			Double relativeDistance = null;
+//			Double relativeDistance = null;
+			Coordinate coordinate = null;
 			
 			while ((inputLine = in.readLine()) != null) {
 //				System.out.println(inputLine);				
@@ -616,14 +616,13 @@ public class MovieServiceImpl implements MovieService {
 						cinema = matCinema.group(1);
 						
 						// Calculate Relative Distance for each Cinema
-						if(searchCriteria.getDistanceRange() != null){						
-							int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));
-							
+//						if(searchCriteria.getDistanceRange() != null){						
+							int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));							
 							if(index > -1){
-								Coordinate coordinate = ConstantUtil.listCinema.get(index);
-								relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
+								coordinate = ConstantUtil.listCinema.get(index);
+//								relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
 							}
-						}
+//						}
 						
 						while ((inputLine = in.readLine()) != null) {
 						
@@ -639,7 +638,8 @@ public class MovieServiceImpl implements MovieService {
 									Movie movie = new Movie();
 									movie.setMovieName(movieName);
 									movie.setCinema(cinema);
-									movie.setRelativeDistance(relativeDistance);
+//									movie.setRelativeDistance(relativeDistance);
+									movie.setCoordinate(coordinate);
 
 									Calendar calMovie = CalendarUtil.getSystemCalendar();
 									
@@ -685,16 +685,16 @@ public class MovieServiceImpl implements MovieService {
 		MovieServiceImpl instance = new MovieServiceImpl();
 		List<Movie> list = new ArrayList<Movie>();
 		
-		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-		list.addAll(list1);
-		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-		list.addAll(list2);
-		List<Movie> list3 = instance.getUAMovies(searchCriteria);
-		list.addAll(list3);		
-		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
-		list.addAll(list4);
-		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
-		list.addAll(list5);		
+//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+//		list.addAll(list1);
+//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+//		list.addAll(list2);
+//		List<Movie> list3 = instance.getUAMovies(searchCriteria);
+//		list.addAll(list3);		
+//		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
+//		list.addAll(list4);
+//		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
+//		list.addAll(list5);		
 		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
 		list.addAll(list6);
 		
@@ -717,16 +717,16 @@ public class MovieServiceImpl implements MovieService {
 		SearchCriteria searchCriteria = new SearchCriteria();
 		searchCriteria.setLanguage("CHI");
 //		searchCriteria.setLanguage("ENG");
-		searchCriteria.setDistanceRange(5000);
-		searchCriteria.setX(22.3291015D);
-		searchCriteria.setY(114.1882631D);	
+//		searchCriteria.setDistanceRange(5000);
+//		searchCriteria.setX(22.3291015D);
+//		searchCriteria.setY(114.1882631D);	
 		
 		MovieServiceImpl searchService = new MovieServiceImpl();
 		List<Movie> list = searchService.getAllMovies(searchCriteria);
 		
 		for (int i = 0; i < list.size(); i++) {
 			Movie movie = list.get(i);
-			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate() + ", Fee: $" + movie.getFee());
+			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Coordinate : " + movie.getCoordinate().getX() + ", " + movie.getCoordinate().getY() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
 		}
 
 		System.out.println("list size: " + list.size());		

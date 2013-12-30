@@ -15,6 +15,10 @@ public class RestletMovieServiceJaxRsApplication extends JaxRsApplication {
 	public RestletMovieServiceJaxRsApplication(Context context) {
 		super(context);
 		this.add(new RestletApplication());
+		
+		
+		
+		
 	}
 
 	private class RestletApplication extends Application {

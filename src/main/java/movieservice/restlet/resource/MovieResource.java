@@ -12,8 +12,13 @@ import movieservice.util.CalendarUtil;
 
 
 @Path("movie")
-public class MovieResource {
+public class MovieResource {	
 	
+	private static List<Movie> movies;
+	
+	public MovieResource(){
+		System.out.println("MovieResource static run...");
+	}
 	
 	@GET
 	@Path("getMovies/{searchCriteria}")
@@ -36,8 +41,8 @@ public class MovieResource {
 		List<Movie> list = searchService.searchMovies(searchCriteria);
 		
 		
-		for (int i = 0; i < list.size(); i++) {
-			Movie movie = list.get(i);
+		for (int i = 0; i < movies.size(); i++) {
+			Movie movie = movies.get(i);
 			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
 		}
 		System.out.println("list size: " + list.size());
