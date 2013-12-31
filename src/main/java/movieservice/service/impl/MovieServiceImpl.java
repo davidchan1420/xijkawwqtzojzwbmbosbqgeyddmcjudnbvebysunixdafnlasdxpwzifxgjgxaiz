@@ -458,10 +458,7 @@ public class MovieServiceImpl implements MovieService {
 			}
 			in.close();						
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
+		} catch(Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -548,10 +545,7 @@ public class MovieServiceImpl implements MovieService {
 			}
 			in.close();						
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -669,10 +663,7 @@ public class MovieServiceImpl implements MovieService {
 			}
 			in.close();						
 
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			return null;
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
@@ -685,22 +676,31 @@ public class MovieServiceImpl implements MovieService {
 		MovieServiceImpl instance = new MovieServiceImpl();
 		List<Movie> list = new ArrayList<Movie>();
 		
-//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-//		list.addAll(list1);
-//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-//		list.addAll(list2);
-//		List<Movie> list3 = instance.getUAMovies(searchCriteria);
-//		list.addAll(list3);		
-//		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
-//		list.addAll(list4);
-//		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
-//		list.addAll(list5);		
+		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+		if (list1 != null) {
+			list.addAll(list1);
+		}
+		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+		if (list2 != null) {
+			list.addAll(list2);
+		}
+		List<Movie> list3 = instance.getUAMovies(searchCriteria);
+		if (list3 != null) {
+			list.addAll(list3);
+		}
+		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
+		if (list4 != null) {
+			list.addAll(list4);
+		}
+		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
+		if (list5 != null) {
+			list.addAll(list5);
+		}
 		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
-		list.addAll(list6);
-		
-//		System.out.println("list1 size: " + list1.size());
-//		System.out.println("list2 size: " + list2.size());
-//		System.out.println("list3 size: " + list3.size());		
+		if (list6 != null) {
+			list.addAll(list6);
+		}
+	
 		return list;		
 	}
 

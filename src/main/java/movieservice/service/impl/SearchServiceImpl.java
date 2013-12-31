@@ -19,7 +19,7 @@ public class SearchServiceImpl implements SearchService {
 		List<Movie> movies = searchService.getAllMovies(searchCriteria);
 		
 		List<Movie> filteredMovies = filterMovies(searchCriteria, movies);
-		return filteredMovies;		
+		return filteredMovies;
 	}
 
 	@Override
@@ -75,6 +75,7 @@ public class SearchServiceImpl implements SearchService {
 		
 		for(int i=0; i<movies.size(); i++){
 			Movie movie = movies.get(i);
+			//TODO: TO BE CHANGED
 			Double relativeDistance = movie.getRelativeDistance();
 			if(relativeDistance <= searchDistance){
 				result.add(movie);

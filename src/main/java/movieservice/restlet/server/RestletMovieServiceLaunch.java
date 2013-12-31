@@ -9,7 +9,7 @@ public class RestletMovieServiceLaunch {
 		createService();
 	}
 
-	public static void createService() throws Exception {
+	private static void createService() throws Exception {
 		Component component = new Component();
 		component.getServers().add(Protocol.HTTP, 1201);
 
