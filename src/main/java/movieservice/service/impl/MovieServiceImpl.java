@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -100,6 +101,7 @@ public class MovieServiceImpl implements MovieService {
 	//MCL Chi Month is 1,2,3,4,5
 	public List<Movie> getMCLMovies(SearchCriteria searchCriteria) {
 		URL url;
+		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
 		String regMovieName = "<td class=\".+?\" valign=\".+?\"><a class=\".+?\" href=\".+?\">(.+?)</a></td>";
@@ -111,8 +113,15 @@ public class MovieServiceImpl implements MovieService {
 		
 		List<Movie> listMovie = new ArrayList<Movie>();
 		try {
-			url = new URL(mapURL.get(CONSTANT_MCL).get(searchCriteria.getLanguage()));
-			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			url = new URL(mapURL.get(CONSTANT_MCL).get(searchCriteria.getLanguage()));			
+			connection = url.openConnection();
+//			connection.setConnectTimeout(5000);
+			connection.setReadTimeout(5000);
+			
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));		
+			
+//			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			
 
 			String movieName = null;
 			String cinema = null;
@@ -190,6 +199,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> getTheGrandMovies(SearchCriteria searchCriteria){
 		
 		URL url;
+		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
 		String regMovieName = "<td class=\".+?\" height=\".+?\" width=\".+?\"><a class=\".+?\" href=\".+?\">(.+?)</a></td>.+?";		
@@ -206,7 +216,12 @@ public class MovieServiceImpl implements MovieService {
 		
 			try {				
 				url = new URL(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordTheGrand.getUrlChi() : coordTheGrand.getUrlEng());
-				in = new BufferedReader(new InputStreamReader(url.openStream()));
+				connection = url.openConnection();
+//				connection.setConnectTimeout(5000);
+				connection.setReadTimeout(5000);
+				in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				
+				//in = new BufferedReader(new InputStreamReader(url.openStream()));
 
 				String movieName = null;
 				String cinema = null;
@@ -289,6 +304,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> getUAMovies(SearchCriteria searchCriteria) {
 
 		URL url;
+		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
 		String regMovieName = "<td width=\".+?\"><a href=\".+?\"><font class=\".+?\">(.+?)</font></a></td>";		
@@ -305,7 +321,12 @@ public class MovieServiceImpl implements MovieService {
 		
 			try {				
 				url = new URL(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordUA.getUrlChi() : coordUA.getUrlEng());
-				in = new BufferedReader(new InputStreamReader(url.openStream()));
+				connection = url.openConnection();
+//				connection.setConnectTimeout(5000);
+				connection.setReadTimeout(5000);
+				in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				
+//				in = new BufferedReader(new InputStreamReader(url.openStream()));
 
 				String movieName = null;
 				String cinema = null;
@@ -375,6 +396,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> getGoldenHarvestMovies(SearchCriteria searchCriteria) {
 
 		URL url;
+		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
 		String regMovieName = "<td align=\".+?\" class=\".+?\"><a style=\".+?\" href=\".+?\">(.+?)</a>";		
@@ -387,7 +409,12 @@ public class MovieServiceImpl implements MovieService {
 		List<Movie> listMovie = new ArrayList<Movie>();
 		try {
 			url = new URL(mapURL.get(CONSTANT_GOLDEN_HARVEST).get(searchCriteria.getLanguage()));
-			in = new BufferedReader(new InputStreamReader(url.openStream()));
+			connection = url.openConnection();
+//			connection.setConnectTimeout(5000);
+			connection.setReadTimeout(5000);
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			
+//			in = new BufferedReader(new InputStreamReader(url.openStream()));
 
 			String movieName = null;
 			String cinema = null;
@@ -464,11 +491,11 @@ public class MovieServiceImpl implements MovieService {
 		}
 		return listMovie;
 	}
-
 	
 	public List<Movie> getBroadwayMovies(SearchCriteria searchCriteria) {		
 
 		URL url;
+		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
 		String regMovieName = "<td width=\".+?\" valign=\".+?\"><span class=\".+?\" style=\".+?\">(.+?)</span><br /></td>";
@@ -481,7 +508,12 @@ public class MovieServiceImpl implements MovieService {
 		List<Movie> listMovie = new ArrayList<Movie>();
 		try {
 			url = new URL(mapURL.get(CONSTANT_BROADWAY).get(searchCriteria.getLanguage()));
-			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
+			connection = url.openConnection();
+//			connection.setConnectTimeout(5000);
+			connection.setReadTimeout(5000);
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			
+//			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
 
 			String movieName = null;
 			String cinema = null;
@@ -557,6 +589,7 @@ public class MovieServiceImpl implements MovieService {
 	public List<Movie> getAMCMovies(SearchCriteria searchCriteria) {
 		
 		URL url;
+		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
 		String regPreMovieName = "<td width=\"34%\" valign=\"top\">";
@@ -574,7 +607,12 @@ public class MovieServiceImpl implements MovieService {
 		List<Movie> listMovie = new ArrayList<Movie>();
 		try {
 			url = new URL(mapURL.get(CONSTANT_AMC).get(searchCriteria.getLanguage()));
-			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
+			connection = url.openConnection();
+//			connection.setConnectTimeout(5000);
+			connection.setReadTimeout(5000);
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			
+//			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
 
 			String movieName = null;
 			String cinema = null;
@@ -680,26 +718,32 @@ public class MovieServiceImpl implements MovieService {
 		if (list1 != null) {
 			list.addAll(list1);
 		}
+//		System.out.println("Finished MCL...");
 		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
 		if (list2 != null) {
 			list.addAll(list2);
 		}
+//		System.out.println("Finished The Grand...");
 		List<Movie> list3 = instance.getUAMovies(searchCriteria);
 		if (list3 != null) {
 			list.addAll(list3);
 		}
+//		System.out.println("Finished UA...");
 		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
 		if (list4 != null) {
 			list.addAll(list4);
 		}
+//		System.out.println("Finished Golden Harvest...");
 		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
 		if (list5 != null) {
 			list.addAll(list5);
 		}
+//		System.out.println("Finished Broadway...");
 		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
 		if (list6 != null) {
 			list.addAll(list6);
 		}
+//		System.out.println("Finished AMC...");
 	
 		return list;		
 	}

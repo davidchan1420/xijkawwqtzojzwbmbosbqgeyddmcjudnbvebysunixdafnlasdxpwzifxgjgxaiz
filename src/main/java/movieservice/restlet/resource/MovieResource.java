@@ -42,7 +42,7 @@ public class MovieResource {
 		searchCriteria.setShowingDate(searchDate);
 		
 //		searchCriteria.setDistanceRange(7);
-		searchCriteria.setMovieName("哈比人");
+//		searchCriteria.setMovieName("哈比人");
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> list = searchService.filterMovies(searchCriteria, movies);		

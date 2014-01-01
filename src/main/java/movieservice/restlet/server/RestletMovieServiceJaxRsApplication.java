@@ -28,7 +28,8 @@ public class RestletMovieServiceJaxRsApplication extends JaxRsApplication {
 		
 		TaskService taskService = new TaskService();
 		//taskService.scheduleWithFixedDelay(new MovieSchedule(), 0, 5, TimeUnit.SECONDS);
-		taskService.scheduleWithFixedDelay(new MovieSchedule(), 0, 5, TimeUnit.MINUTES);
+		//taskService.scheduleAtFixedRate(new MovieSchedule(), 0, 10, TimeUnit.SECONDS);
+		taskService.scheduleWithFixedDelay(new MovieSchedule(), 0, 1, TimeUnit.MINUTES);
 	}
 	
 	
