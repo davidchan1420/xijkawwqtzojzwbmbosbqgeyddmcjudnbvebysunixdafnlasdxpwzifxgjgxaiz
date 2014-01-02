@@ -115,13 +115,9 @@ public class MovieServiceImpl implements MovieService {
 		try {
 			url = new URL(mapURL.get(CONSTANT_MCL).get(searchCriteria.getLanguage()));			
 			connection = url.openConnection();
-//			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
 			
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));		
-			
-//			in = new BufferedReader(new InputStreamReader(url.openStream()));
-			
 
 			String movieName = null;
 			String cinema = null;
@@ -217,11 +213,8 @@ public class MovieServiceImpl implements MovieService {
 			try {				
 				url = new URL(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordTheGrand.getUrlChi() : coordTheGrand.getUrlEng());
 				connection = url.openConnection();
-//				connection.setConnectTimeout(5000);
 				connection.setReadTimeout(5000);
 				in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				
-				//in = new BufferedReader(new InputStreamReader(url.openStream()));
 
 				String movieName = null;
 				String cinema = null;
@@ -322,11 +315,8 @@ public class MovieServiceImpl implements MovieService {
 			try {				
 				url = new URL(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordUA.getUrlChi() : coordUA.getUrlEng());
 				connection = url.openConnection();
-//				connection.setConnectTimeout(5000);
 				connection.setReadTimeout(5000);
 				in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				
-//				in = new BufferedReader(new InputStreamReader(url.openStream()));
 
 				String movieName = null;
 				String cinema = null;
@@ -410,11 +400,8 @@ public class MovieServiceImpl implements MovieService {
 		try {
 			url = new URL(mapURL.get(CONSTANT_GOLDEN_HARVEST).get(searchCriteria.getLanguage()));
 			connection = url.openConnection();
-//			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
 			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			
-//			in = new BufferedReader(new InputStreamReader(url.openStream()));
 
 			String movieName = null;
 			String cinema = null;
@@ -509,11 +496,8 @@ public class MovieServiceImpl implements MovieService {
 		try {
 			url = new URL(mapURL.get(CONSTANT_BROADWAY).get(searchCriteria.getLanguage()));
 			connection = url.openConnection();
-//			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
-			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			
-//			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "Big5"));
 
 			String movieName = null;
 			String cinema = null;
@@ -608,11 +592,8 @@ public class MovieServiceImpl implements MovieService {
 		try {
 			url = new URL(mapURL.get(CONSTANT_AMC).get(searchCriteria.getLanguage()));
 			connection = url.openConnection();
-//			connection.setConnectTimeout(5000);
 			connection.setReadTimeout(5000);
-			in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-			
-//			in = new BufferedReader(new InputStreamReader(url.openStream(), "Big5"));
+			in = new BufferedReader(new InputStreamReader(connection.getInputStream(), "Big5"));
 
 			String movieName = null;
 			String cinema = null;

@@ -12,6 +12,11 @@ import movieservice.util.ConstantUtil;
 public class MovieSchedule implements Runnable {
 
 	private int flag = 0;
+	private String language = null;
+	
+	public MovieSchedule(String language) {
+		this.language = language;
+	}
 
 //	@Override
 //	public void run() {
@@ -42,13 +47,21 @@ public class MovieSchedule implements Runnable {
 			System.out.println(flag + ", start at: " + CalendarUtil.getSystemDate());
 			MovieServiceImpl movieServiceImpl = new MovieServiceImpl();			
 			SearchCriteria searchCriteria = new SearchCriteria();
-			searchCriteria.setLanguage(ConstantUtil.LANG_CHI);
+			searchCriteria.setLanguage(this.language);
 			
 			List<Movie> movies = movieServiceImpl.getAllMovies(searchCriteria);
-			MovieResource.setMovies(movies);
-			System.out.println("\tSize is: " + MovieResource.getMovies().size());
+			
+			if(this.language.equalsIgnoreCase(ConstantUtil.LANG_CHI)){
+				MovieResource.setMoviesChi(movies);
+				System.out.println("CHI Size is: " + MovieResource.getMoviesChi().size());
+			}
+			if(this.language.equalsIgnoreCase(ConstantUtil.LANG_ENG)){
+				MovieResource.setMoviesEng(movies);
+				System.out.println("ENG Size is: " + MovieResource.getMoviesEng().size());
+			}			
 			
 			System.out.println(flag + ", end at: " + CalendarUtil.getSystemDate());
+			
 			
 		} catch (Exception e){
 			System.out.println("Movie Extraction Exception occurrs...");

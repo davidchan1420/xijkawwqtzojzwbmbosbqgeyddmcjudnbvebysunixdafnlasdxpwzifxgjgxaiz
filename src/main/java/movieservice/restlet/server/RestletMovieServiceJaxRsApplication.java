@@ -8,6 +8,7 @@ import javax.ws.rs.core.Application;
 
 import movieservice.restlet.resource.MovieResource;
 import movieservice.runnable.MovieSchedule;
+import movieservice.util.ConstantUtil;
 
 import org.restlet.Context;
 import org.restlet.ext.jaxrs.JaxRsApplication;
@@ -29,7 +30,9 @@ public class RestletMovieServiceJaxRsApplication extends JaxRsApplication {
 		TaskService taskService = new TaskService();
 		//taskService.scheduleWithFixedDelay(new MovieSchedule(), 0, 5, TimeUnit.SECONDS);
 		//taskService.scheduleAtFixedRate(new MovieSchedule(), 0, 10, TimeUnit.SECONDS);
-		taskService.scheduleWithFixedDelay(new MovieSchedule(), 0, 1, TimeUnit.MINUTES);
+		
+		taskService.scheduleWithFixedDelay(new MovieSchedule(ConstantUtil.LANG_CHI), 0, 5, TimeUnit.MINUTES);
+		taskService.scheduleWithFixedDelay(new MovieSchedule(ConstantUtil.LANG_ENG), 0, 5, TimeUnit.MINUTES);
 	}
 	
 	

@@ -12,15 +12,15 @@ import movieservice.util.CalendarUtil;
 
 public class SearchServiceImpl implements SearchService {
 
-	@Override
-	public List<Movie> searchMovies(SearchCriteria searchCriteria) {
-				
-		MovieServiceImpl searchService = new MovieServiceImpl();
-		List<Movie> movies = searchService.getAllMovies(searchCriteria);
-		
-		List<Movie> filteredMovies = filterMovies(searchCriteria, movies);
-		return filteredMovies;
-	}
+//	@Override
+//	public List<Movie> searchMovies(SearchCriteria searchCriteria) {
+//				
+//		MovieServiceImpl searchService = new MovieServiceImpl();
+//		List<Movie> movies = searchService.getAllMovies(searchCriteria);
+//		
+//		List<Movie> filteredMovies = filterMovies(searchCriteria, movies);
+//		return filteredMovies;
+//	}
 
 	@Override
 	public List<Movie> filterMovies(SearchCriteria searchCriteria, List<Movie> movies) {
@@ -104,49 +104,33 @@ public class SearchServiceImpl implements SearchService {
 		return result;
 	}
 
-	public static void main(String[] args) {
-
-		SearchCriteria searchCriteria = new SearchCriteria();
-		searchCriteria.setLanguage("CHI");
-//		searchCriteria.setLanguage("ENG");		
-		searchCriteria.setX(22.3291015D);
-		searchCriteria.setY(114.1882631D);
-		
-		Calendar searchDate = CalendarUtil.getSystemCalendar();		
-		searchDate.add(Calendar.DATE, 1);
-		searchCriteria.setShowingDate(searchDate);
-		
-		searchCriteria.setDistanceRange(7);
-		searchCriteria.setMovieName("哈比人");
-		
-		SearchServiceImpl searchService = new SearchServiceImpl();
-		List<Movie> list = searchService.searchMovies(searchCriteria);
-		
-		
-		for (int i = 0; i < list.size(); i++) {
-			Movie movie = list.get(i);
-			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
-		}
-		System.out.println("list size: " + list.size());
-		
-	}
-
 //	public static void main(String[] args) {
+//
+//		SearchCriteria searchCriteria = new SearchCriteria();
+//		searchCriteria.setLanguage("CHI");
+////		searchCriteria.setLanguage("ENG");		
+//		searchCriteria.setX(22.3291015D);
+//		searchCriteria.setY(114.1882631D);
 //		
-//		Date searchDate = CalendarUtil.getTrimDayToMax(CalendarUtil.getSystemDate());		
-//		System.out.println("Search Date in max: " + searchDate);
+//		Calendar searchDate = CalendarUtil.getSystemCalendar();		
+//		searchDate.add(Calendar.DATE, 1);
+//		searchCriteria.setShowingDate(searchDate);
 //		
-//		Calendar searchCalendar = CalendarUtil.getSystemCalendar();
-//		searchCalendar.setTime(searchDate);
+//		searchCriteria.setDistanceRange(7);
+//		searchCriteria.setMovieName("哈比人");
 //		
-//		Calendar showingDate = CalendarUtil.getSystemCalendar();
-//		showingDate.setTime(searchDate);		
-//		showingDate.add(Calendar.SECOND, 1);
+//		SearchServiceImpl searchService = new SearchServiceImpl();
+//		List<Movie> list = searchService.searchMovies(searchCriteria);
 //		
-//		System.out.println("Showing Date is: " + showingDate.getTime());
 //		
-//		System.out.println("It is : " + (searchCalendar.after(showingDate.getTime()) ? true : false));
+//		for (int i = 0; i < list.size(); i++) {
+//			Movie movie = list.get(i);
+//			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
+//		}
+//		System.out.println("list size: " + list.size());
 //		
 //	}
+
+
 	
 }

@@ -8,7 +8,7 @@ import movieservice.domain.SearchCriteria;
 public interface SearchService {
 
 	
-	public List<Movie> searchMovies(SearchCriteria searchCriteria);
+//	public List<Movie> searchMovies(SearchCriteria searchCriteria);
 	
 	public List<Movie> filterMovies(SearchCriteria searchCriteria, final List<Movie> movies);
 	
