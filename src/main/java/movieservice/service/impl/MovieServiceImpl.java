@@ -98,7 +98,6 @@ public class MovieServiceImpl implements MovieService {
 		mapAPM.put("PM", Calendar.PM);
 	}
 
-	//MCL Chi Month is 1,2,3,4,5
 	public List<Movie> getMCLMovies(SearchCriteria searchCriteria) {
 		URL url;
 		URLConnection connection;

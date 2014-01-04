@@ -8,6 +8,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
+import com.google.gson.Gson;
+
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
 import movieservice.service.impl.SearchServiceImpl;
@@ -38,20 +40,10 @@ public class MovieResource {
 	
 	@GET
 	@Path("getMovies/{searchCriteria}")
-	public String getMovies(@PathParam("searchCriteria") String arg1){
+	public String getMovies(@PathParam("searchCriteria") String argSearchCriteria){
 		
-		SearchCriteria searchCriteria = new SearchCriteria();
-		searchCriteria.setLanguage("CHI");
-//		searchCriteria.setLanguage("ENG");		
-		searchCriteria.setX(22.3291015D);
-		searchCriteria.setY(114.1882631D);
-		
-		Calendar searchDate = CalendarUtil.getSystemCalendar();		
-		searchDate.add(Calendar.DATE, 1);
-		searchCriteria.setShowingDate(searchDate);
-		
-//		searchCriteria.setDistanceRange(7);
-//		searchCriteria.setMovieName("哈比人");
+		Gson gson = new Gson();
+		SearchCriteria searchCriteria = gson.fromJson(argSearchCriteria, SearchCriteria.class);
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> result = searchService.filterMovies(searchCriteria, searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? moviesChi : moviesEng);		
@@ -62,9 +54,84 @@ public class MovieResource {
 		}
 		System.out.println("result size: " + result.size());
 		
-		return null;		
+		String gsonResult = gson.toJson(result);
+		return gsonResult;
 	}
-
+	
+//	@GET
+//	@Path("getMovies/{searchCriteria}")
+//	public String getMovies(@PathParam("searchCriteria") String arg1){
+//		
+//		SearchCriteria searchCriteria = new SearchCriteria();
+//		searchCriteria.setLanguage("CHI");
+////		searchCriteria.setLanguage("ENG");		
+//		searchCriteria.setX(22.3291015D);
+//		searchCriteria.setY(114.1882631D);
+//		
+//		List<SearchCriteria.ShowingDate> listShowingDate = new ArrayList<SearchCriteria.ShowingDate>();		
+//		
+//		Calendar cal = CalendarUtil.getSystemCalendar();		
+//		
+//		SearchCriteria.ShowingDate showingDate = searchCriteria.new ShowingDate();		
+//		showingDate.setShowingDate(cal);		
+//		listShowingDate.add(showingDate);
+//		
+//		showingDate = searchCriteria.new ShowingDate();
+//		cal.add(Calendar.DATE, 1);		
+//		showingDate.setShowingDate(cal);		
+//		listShowingDate.add(showingDate);
+//		
+//		showingDate = searchCriteria.new ShowingDate();
+//		cal.add(Calendar.DATE, 1);		
+//		showingDate.setShowingDate(cal);		
+//		listShowingDate.add(showingDate);
+//		
+//		searchCriteria.setShowingDates(listShowingDate);
+//		
+////		searchCriteria.setDistanceRange(5);
+//		searchCriteria.setMovieName("浪魂");
+//		
+//		SearchServiceImpl searchService = new SearchServiceImpl();
+//		List<Movie> result = searchService.filterMovies(searchCriteria, searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? moviesChi : moviesEng);		
+//		
+//		for (int i = 0; i < result.size(); i++) {
+//			Movie movie = result.get(i);
+//			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
+//		}
+//		System.out.println("result size: " + result.size());
+//		
+//		Gson gson = new Gson();
+//		String gsonResult = gson.toJson(result);		
+////		return gsonResult;
+//		return null;
+//	}
+	
+//	public static void main(String[] args){
+//		
+//		SearchCriteria searchCriteria = new SearchCriteria();
+//		
+//		List<SearchCriteria.ShowingDate> list = new ArrayList<SearchCriteria.ShowingDate>();		
+//		
+//		Calendar cal = CalendarUtil.getSystemCalendar();		
+//		SearchCriteria.ShowingDate showingDate = searchCriteria.new ShowingDate();
+//		
+//		showingDate.setShowingDate(cal);		
+//		list.add(showingDate);
+//						
+//		showingDate = searchCriteria.new ShowingDate();
+//		cal.add(Calendar.DATE, 10);
+//		
+//		showingDate.setShowingDate(cal);		
+//		list.add(showingDate);
+//		
+//		for(int i=0; i < list.size(); i++){
+//			
+//			SearchCriteria.ShowingDate ssd = list.get(i);
+//			Calendar sdMin = ssd.getShowingDateMin();
+//			Calendar sdMax = ssd.getShowingDateMax();
+//			System.out.println(i + ": " + "Min: " + sdMin.getTime() + ", Max: " + sdMax.getTime());
+//		}
+//	}
 
 }
 

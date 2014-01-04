@@ -36,7 +36,8 @@ public class MovieSchedule implements Runnable {
 	@Override
 	public void run() {
 
-		try{
+		try{			
+			//TODO: DEBUG ONLY
 			flag++;
 			
 			if (flag % 5 == 0) {

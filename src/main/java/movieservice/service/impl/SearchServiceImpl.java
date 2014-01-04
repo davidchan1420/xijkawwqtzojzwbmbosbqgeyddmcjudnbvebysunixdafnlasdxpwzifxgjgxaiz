@@ -9,6 +9,7 @@ import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
 import movieservice.service.SearchService;
 import movieservice.util.CalendarUtil;
+import movieservice.util.MovieUtil;
 
 public class SearchServiceImpl implements SearchService {
 
@@ -75,9 +76,10 @@ public class SearchServiceImpl implements SearchService {
 		
 		for(int i=0; i<movies.size(); i++){
 			Movie movie = movies.get(i);
-			//TODO: TO BE CHANGED
-			Double relativeDistance = movie.getRelativeDistance();
+			Double relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, movie.getCoordinate());
+			
 			if(relativeDistance <= searchDistance){
+				movie.setRelativeDistance(relativeDistance);
 				result.add(movie);
 			}			
 		}
@@ -90,15 +92,22 @@ public class SearchServiceImpl implements SearchService {
 		
 		List<Movie> result = new ArrayList<Movie>();
 		
-		Calendar searchDateMax = searchCriteria.getShowingDateMax();		
-		Calendar searchDateMin = searchCriteria.getShowingDateMin();
+		List<SearchCriteria.ShowingDate> searchShowingDates = searchCriteria.getShowingDates();
 		
 		for(int i=0; i<movies.size(); i++){
 			Movie movie = movies.get(i);
-			Calendar showingDate = movie.getShowingDate();
-			if(searchDateMax.after(showingDate) && searchDateMin.before(showingDate)){
-				result.add(movie);
-			}
+			Calendar movieShowingDate = movie.getShowingDate();
+			
+			for(int h=0; h < searchShowingDates.size(); h++){
+				
+				SearchCriteria.ShowingDate searchShowingDate = searchShowingDates.get(h);
+				Calendar searchShowingDateMax = searchShowingDate.getShowingDateMax();		
+				Calendar searchShowingDateMin = searchShowingDate.getShowingDateMin();
+				
+				if(searchShowingDateMax.after(movieShowingDate) && (searchShowingDateMin.before(movieShowingDate) || searchShowingDateMin.equals(movieShowingDate))){
+					result.add(movie);
+				}
+			}			
 		}
 		
 		return result;

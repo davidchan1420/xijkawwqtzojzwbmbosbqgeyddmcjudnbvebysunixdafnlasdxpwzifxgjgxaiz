@@ -62,14 +62,14 @@ public class Movie {
 	public void setCoordinate(Coordinate coordinate) {
 		this.coordinate = coordinate;
 	}
+	public Coordinate getCoordinate() {
+		return coordinate;
+	}	
 	public void setRelativeDistance(Double distance) {
 		this.relativeDistance = distance;
 	}	
 	public Double getRelativeDistance() {
 		return relativeDistance;
 	}
-	public Coordinate getCoordinate() {
-		return coordinate;
-	}	
 
 }
