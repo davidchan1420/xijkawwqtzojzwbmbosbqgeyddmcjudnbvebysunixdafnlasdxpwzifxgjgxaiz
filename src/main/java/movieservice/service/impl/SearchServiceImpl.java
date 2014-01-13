@@ -1,14 +1,18 @@
 package movieservice.service.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
+import movieservice.comparator.CinemaComparator;
+import movieservice.comparator.DistanceComparator;
+import movieservice.comparator.MovieNameComparator;
+import movieservice.comparator.ShowingDateComparator;
+import movieservice.comparator.MovieComparator;
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
 import movieservice.service.SearchService;
-import movieservice.util.CalendarUtil;
 import movieservice.util.MovieUtil;
 
 public class SearchServiceImpl implements SearchService {
@@ -31,17 +35,49 @@ public class SearchServiceImpl implements SearchService {
 		List<Movie> times = filterByTime(searchCriteria, result);
 		result.retainAll(times);
 		
-		List<Movie> names = filterByName(searchCriteria, result);
-		result.retainAll(names);
+		List<Movie> movieNames = filterByMovieName(searchCriteria, result);
+		result.retainAll(movieNames);
+		
+		List<Movie> cinemas = filterByCinema(searchCriteria, result);
+		result.retainAll(cinemas);
 		
 		List<Movie> distances = filterByDistance(searchCriteria, result);
-		result.retainAll(distances);			
+		result.retainAll(distances);
+		
+		sortMovie(searchCriteria, result);
 		
 		return result;
 	}
+	
+	
+	public void sortMovie(SearchCriteria searchCriteria, final List<Movie> movies){
+		
+		Collections.sort(movies, new MovieComparator(searchCriteria));
+		
+	}
+	
+//	public void sortMovie(SearchCriteria searchCriteria, final List<Movie> movies){
+//		
+//		// Sort by Relative Distance	***** Always sort first if user chose to sort by distance *****
+//		if(searchCriteria.getDistanceRange() != null){
+//			Collections.sort(movies, new MovieDistanceComparator());
+//		}
+//		// Sort by Movie Name
+//		if(searchCriteria.getMovieName() != null){
+//			Collections.sort(movies, new MovieNameComparator());
+//		}
+//		// Sort by Cinema
+//		if(searchCriteria.getCinema() != null){
+//			Collections.sort(movies, new MovieCinemaComparator());
+//		}
+//		// Sort by Showing Date
+//		if(searchCriteria.getShowingDates() != null){
+//			Collections.sort(movies, new MovieShowingDateComparator());
+//		}		
+//	}
 
 	@Override
-	public List<Movie> filterByName(SearchCriteria searchCriteria, final List<Movie> movies) {		
+	public List<Movie> filterByMovieName(SearchCriteria searchCriteria, final List<Movie> movies) {		
 					
 		if(searchCriteria.getMovieName() == null)
 			return movies;
@@ -59,11 +95,33 @@ public class SearchServiceImpl implements SearchService {
 			if(movieName.contains(searchMovieName)){
 				result.add(movie);				
 			}			
-		}
-		
+		}		
 		return result;
 	}
 
+	@Override
+	public List<Movie> filterByCinema(SearchCriteria searchCriteria, List<Movie> movies) {
+		
+		if(searchCriteria.getCinema() == null)
+			return movies;
+		
+		String searchCinema = searchCriteria.getCinema().trim().toLowerCase();
+		if(searchCinema.length() < 1)
+			return movies;		
+		
+		List<Movie> result = new ArrayList<Movie>();
+		
+		for(int i=0; i<movies.size(); i++){
+			Movie movie = movies.get(i);
+			
+			String cinema = movie.getCinema().toLowerCase();
+			if(cinema.contains(searchCinema)){
+				result.add(movie);				
+			}			
+		}		
+		return result;
+	}
+	
 	@Override
 	public List<Movie> filterByDistance(SearchCriteria searchCriteria, List<Movie> movies) {
 		

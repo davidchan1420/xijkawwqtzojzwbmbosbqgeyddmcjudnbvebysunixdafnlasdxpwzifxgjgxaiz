@@ -9,6 +9,7 @@ public class SearchCriteria {
 
 	private String language;
 	private String movieName;
+	private String cinema;
 
 	public class ShowingDate{
 		private Calendar showingDateMin;
@@ -32,10 +33,7 @@ public class SearchCriteria {
 	}
 	
 	private List<ShowingDate> showingDates;
-	
-//	private Calendar showingDateMin;
-//	private Calendar showingDateMax;
-	
+
 	private Double x;
 	private Double y;
 	private Integer distanceRange;
@@ -55,32 +53,15 @@ public class SearchCriteria {
 
 	public void setMovieName(String movieName) {
 		this.movieName = movieName;
+	}	
+	
+	public String getCinema() {
+		return cinema;
 	}
-	
-//	public void setShowingDate(Calendar showingDate){
-//		
-//		Calendar showingDateMax = CalendarUtil.trimDayToMax(showingDate.getTime());
-//		this.showingDateMax = showingDateMax;
-//		
-//		Calendar showingDateMin = CalendarUtil.trimDayToMin(showingDate.getTime());
-//		this.showingDateMin = showingDateMin;		
-//	}
-//	
-//	public Calendar getShowingDateMin() {
-//		return showingDateMin;
-//	}
-//
-//	public Calendar getShowingDateMax() {
-//		return showingDateMax;
-//	}
 
-//	public void setShowingDateMin(Calendar showingDate) {
-//	this.showingDateMin = showingDate;
-//}	
-	
-//	public void setShowingDateMax(Calendar showingDateMax) {
-//		this.showingDateMax = showingDateMax;
-//	}
+	public void setCinema(String cinema) {
+		this.cinema = cinema;
+	}
 
 	public List<ShowingDate> getShowingDates() {
 		return showingDates;
