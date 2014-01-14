@@ -38,13 +38,13 @@ public class MovieSchedule implements Runnable {
 
 		try{			
 			//TODO: DEBUG ONLY
-//			flag++;
+			flag++;
 //			
 //			if (flag % 5 == 0) {
 //				System.out.println("Exception...");
 //				throw new RuntimeException();
 //			}		
-//			System.out.println(flag + ", start at: " + CalendarUtil.getSystemDate());
+			System.out.println(flag + ", start at: " + CalendarUtil.getSystemDate());
 			
 			MovieServiceImpl movieServiceImpl = new MovieServiceImpl();			
 			SearchCriteria searchCriteria = new SearchCriteria();
@@ -54,14 +54,14 @@ public class MovieSchedule implements Runnable {
 			
 			if(this.language.equalsIgnoreCase(ConstantUtil.LANG_CHI)){
 				MovieResource.setMoviesChi(movies);
-//				System.out.println("CHI Size is: " + MovieResource.getMoviesChi().size());
+				System.out.println("CHI Size is: " + MovieResource.getMoviesChi().size());
 			}
 			if(this.language.equalsIgnoreCase(ConstantUtil.LANG_ENG)){
 				MovieResource.setMoviesEng(movies);
-//				System.out.println("ENG Size is: " + MovieResource.getMoviesEng().size());
+				System.out.println("ENG Size is: " + MovieResource.getMoviesEng().size());
 			}			
 			
-//			System.out.println(flag + ", end at: " + CalendarUtil.getSystemDate());
+			System.out.println(flag + ", end at: " + CalendarUtil.getSystemDate());
 			
 			
 		} catch (Exception e){
