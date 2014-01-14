@@ -19,6 +19,7 @@ import movieservice.service.MovieService;
 import movieservice.util.CalendarUtil;
 import movieservice.util.ConstantUtil;
 import movieservice.util.Coordinate;
+import movieservice.util.CoordinateBroadway;
 import movieservice.util.CoordinateTheGrand;
 import movieservice.util.CoordinateUA;
 import movieservice.util.MovieUtil;
@@ -133,7 +134,7 @@ public class MovieServiceImpl implements MovieService {
 				}
 				
 				Pattern patCinema = Pattern.compile(regCinema);
-				Matcher matCinema = patCinema.matcher(inputLine);				
+				Matcher matCinema = patCinema.matcher(inputLine);
 				if (matCinema.find()) {
 //					System.out.println("\t"+matCinema.group(1));
 					cinema = matCinema.group(1);
@@ -501,7 +502,7 @@ public class MovieServiceImpl implements MovieService {
 			String movieName = null;
 			String cinema = null;
 //			Double relativeDistance = null;
-			Coordinate coordinate = null;
+			CoordinateBroadway coordinateBroadway = null;
 			
 			while ((inputLine = in.readLine()) != null) {
 //				System.out.println(inputLine);
@@ -520,9 +521,9 @@ public class MovieServiceImpl implements MovieService {
 					
 					// Calculate Relative Distance for each Cinema
 //					if(searchCriteria.getDistanceRange() != null){						
-						int index = ConstantUtil.listCinema.indexOf(new Coordinate(cinema));						
+						int index = ConstantUtil.listCinemaBroadway.indexOf(new CoordinateBroadway(cinema));						
 						if(index > -1){
-							coordinate = ConstantUtil.listCinema.get(index);
+							coordinateBroadway = ConstantUtil.listCinemaBroadway.get(index);
 //							relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordinate);
 						}
 //					}					
@@ -534,10 +535,12 @@ public class MovieServiceImpl implements MovieService {
 //					System.out.println("\t\t"+matTime.group(1)+"-"+matTime.group(2)+" "+matTime.group(3)+":"+matTime.group(4)+" "+matTime.group(5)+" $"+matTime.group(6));
 					Movie movie = new Movie();
 					movie.setMovieName(movieName);
-					movie.setCinema(cinema);
+//					movie.setCinema(cinema);					
+					movie.setCinema(searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordinateBroadway.getDisplayNameChinese() : coordinateBroadway.getDisplayNameEnglish());
+					
 //					movie.setRelativeDistance(relativeDistance);
-					movie.setCoordinate(coordinate);
-//
+					movie.setCoordinate(coordinateBroadway);
+
 					Calendar calMovie = CalendarUtil.getSystemCalendar();
 					
 					calMovie.set(Calendar.DATE, Integer.parseInt(matTime.group(1)));

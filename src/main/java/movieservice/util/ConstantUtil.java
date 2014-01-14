@@ -10,6 +10,7 @@ public class ConstantUtil {
 		
 	//public static HashMap<String, ArrayList<Coordinate>> mapCinema = new HashMap<String, ArrayList<Coordinate>>();
 	public static final ArrayList<Coordinate> listCinema = new ArrayList<Coordinate>();
+	public static final ArrayList<CoordinateBroadway> listCinemaBroadway = new ArrayList<CoordinateBroadway>();
 	public static final ArrayList<CoordinateTheGrand> listCinemaTheGrand = new ArrayList<CoordinateTheGrand>();	
 	public static final ArrayList<CoordinateUA> listCinemaUA = new ArrayList<CoordinateUA>();		
 	
@@ -29,17 +30,17 @@ public class ConstantUtil {
 		listCinema.add(new Coordinate("嘉禾荃新天地", "GH Citywalk", 22.367732D, 114.114832D));
 		listCinema.add(new Coordinate("嘉禾黃埔", "GH Whampoa", 22.304686D, 114.19035D));
 		
-		listCinema.add(new Coordinate("PALACE ifc", "PALACE ifc", 22.285537D, 114.158155D));
-		listCinema.add(new Coordinate("數碼港", "CYBERPORT", 22.261037D, 114.129453D));		
-		listCinema.add(new Coordinate("荷里活", "HOLLYWOOD", 22.340604D, 114.202092D));		
-		listCinema.add(new Coordinate("The ONE", "The ONE", 22.29979D, 114.172172D));		
-		listCinema.add(new Coordinate("電影中心", "CINEMATHEQUE", 22.310694D, 114.168913D));		
-		listCinema.add(new Coordinate("旺角", "MONGKOK", 22.317116D, 114.170627D));		
-		listCinema.add(new Coordinate("PALACE  apm", "PALACE  apm", 22.312299D, 114.225355D));		
-		listCinema.add(new Coordinate("葵芳", "KWAI FONG", 22.357456D, 114.126156D));	
-		listCinema.add(new Coordinate("荃灣", "TSUEN WAN", 22.37124D, 114.111039D));		
-		listCinema.add(new Coordinate("元朗", "元朗", 22.445632D, 114.035822D));	//Reserved till 2013-03-06		
-		listCinema.add(new Coordinate("嘉湖銀座", "KINGSWOOD GINZA", 22.457246D, 114.004021D));
+		listCinemaBroadway.add(new CoordinateBroadway("PALACE ifc", "PALACE ifc", "PALACE ifc", "PALACE ifc", 22.285537D, 114.158155D));
+		listCinemaBroadway.add(new CoordinateBroadway("數碼港", "CYBERPORT", "百老匯 數碼港", "Broadway CYBERPORT", 22.261037D, 114.129453D));		
+		listCinemaBroadway.add(new CoordinateBroadway("荷里活", "HOLLYWOOD", "百老匯 荷里活", "Broadway HOLLYWOOD", 22.340604D, 114.202092D));		
+		listCinemaBroadway.add(new CoordinateBroadway("The ONE", "The ONE", "The ONE", "The ONE", 22.29979D, 114.172172D));		
+		listCinemaBroadway.add(new CoordinateBroadway("電影中心", "CINEMATHEQUE", "電影中心", "CINEMATHEQUE", 22.310694D, 114.168913D));		
+		listCinemaBroadway.add(new CoordinateBroadway("旺角", "MONGKOK", "百老匯 旺角", "Broadway MONGKOK", 22.317116D, 114.170627D));		
+		listCinemaBroadway.add(new CoordinateBroadway("PALACE  apm", "PALACE  apm", "PALACE  apm", "PALACE  apm", 22.312299D, 114.225355D));		
+		listCinemaBroadway.add(new CoordinateBroadway("葵芳", "KWAI FONG", "百老匯 葵芳", "Broadway KWAI FONG", 22.357456D, 114.126156D));	
+		listCinemaBroadway.add(new CoordinateBroadway("荃灣", "TSUEN WAN", "百老匯 荃灣", "Broadway TSUEN WAN", 22.37124D, 114.111039D));		
+		listCinemaBroadway.add(new CoordinateBroadway("元朗", "元朗", "百老匯 元朗", "Broadway 元朗", 22.445632D, 114.035822D));	//Reserved till 2013-03-06		
+		listCinemaBroadway.add(new CoordinateBroadway("嘉湖銀座", "KINGSWOOD GINZA", "百老匯 嘉湖銀座", "Broadway KINGSWOOD GINZA", 22.457246D, 114.004021D));
 		
 		listCinema.add(new Coordinate("AMC 又一城", "AMC Festival Walk", 22.337535D, 114.173725D));		
 		listCinema.add(new Coordinate("AMC Pacific Place", "AMC Pacific Place", 22.277414D, 114.166308D));		

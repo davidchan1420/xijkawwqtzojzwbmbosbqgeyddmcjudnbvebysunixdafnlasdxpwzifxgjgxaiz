@@ -58,20 +58,21 @@ public class MovieResource {
 //		return gsonResult;
 //	}
 	
+	//TODO: DEBUG ONLY	
 	@GET
 	@Path("getMovies/{distance}")
 	public String getMovies(@PathParam("distance") String distance){
 		
 		return getMovies(distance, null, null);		
 	}
-	
+	//TODO: DEBUG ONLY	
 	@GET
 	@Path("getMovies/{distance}/{movieName}")
 	public String getMovies(@PathParam("distance") String distance, @PathParam("movieName") String movieName){
 		
 		return getMovies(distance, movieName, null);		
 	}
-	
+	//TODO: DEBUG ONLY
 	@GET
 	@Path("getMovies/{distance}/{movieName}/{cinema}")
 	public String getMovies(@PathParam("distance") String distance, @PathParam("movieName") String movieName, @PathParam("cinema") String cinema){
@@ -104,7 +105,7 @@ public class MovieResource {
 		
 		searchCriteria.setDistanceRange(Integer.parseInt(distance));
 		searchCriteria.setMovieName(movieName);
-		searchCriteria.setCinema(cinema);
+		searchCriteria.setCinema("百老匯");
 		
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> result = searchService.filterMovies(searchCriteria, searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? moviesChi : moviesEng);		

@@ -16,6 +16,7 @@ public class MovieComparator implements Comparator<Movie> {
 	@Override
 	public int compare(Movie o1, Movie o2) {
 
+		// ***** Always sort first if user chose to sort by distance *****
 		if (searchCriteria.getDistanceRange() != null) {
 
 			int distance = compareDistance(o1, o2);

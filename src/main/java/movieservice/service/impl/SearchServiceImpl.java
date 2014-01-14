@@ -56,25 +56,6 @@ public class SearchServiceImpl implements SearchService {
 		
 	}
 	
-//	public void sortMovie(SearchCriteria searchCriteria, final List<Movie> movies){
-//		
-//		// Sort by Relative Distance	***** Always sort first if user chose to sort by distance *****
-//		if(searchCriteria.getDistanceRange() != null){
-//			Collections.sort(movies, new MovieDistanceComparator());
-//		}
-//		// Sort by Movie Name
-//		if(searchCriteria.getMovieName() != null){
-//			Collections.sort(movies, new MovieNameComparator());
-//		}
-//		// Sort by Cinema
-//		if(searchCriteria.getCinema() != null){
-//			Collections.sort(movies, new MovieCinemaComparator());
-//		}
-//		// Sort by Showing Date
-//		if(searchCriteria.getShowingDates() != null){
-//			Collections.sort(movies, new MovieShowingDateComparator());
-//		}		
-//	}
 
 	@Override
 	public List<Movie> filterByMovieName(SearchCriteria searchCriteria, final List<Movie> movies) {		
