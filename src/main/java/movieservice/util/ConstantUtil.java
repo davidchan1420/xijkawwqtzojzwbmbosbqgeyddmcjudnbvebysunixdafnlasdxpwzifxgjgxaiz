@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class ConstantUtil {
 	
-	public static final String LANG_CHI = "CHI";
-	public static final String LANG_ENG = "ENG";	
+	public static final String LANG_CHI = "zh";
+	public static final String LANG_ENG = "en";	
 	private static final String MCL = "MCL";
 		
 	//public static HashMap<String, ArrayList<Coordinate>> mapCinema = new HashMap<String, ArrayList<Coordinate>>();

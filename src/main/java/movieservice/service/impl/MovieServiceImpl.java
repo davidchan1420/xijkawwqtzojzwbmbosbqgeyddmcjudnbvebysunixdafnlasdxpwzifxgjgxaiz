@@ -743,8 +743,8 @@ public class MovieServiceImpl implements MovieService {
 	public static void main(String[] args) {
 
 		SearchCriteria searchCriteria = new SearchCriteria();
-		searchCriteria.setLanguage("CHI");
-//		searchCriteria.setLanguage("ENG");
+		searchCriteria.setLanguage(ConstantUtil.LANG_CHI);
+//		searchCriteria.setLanguage(ConstantUtil.LANG_ENG);
 //		searchCriteria.setDistanceRange(5000);
 //		searchCriteria.setX(22.3291015D);
 //		searchCriteria.setY(114.1882631D);	
