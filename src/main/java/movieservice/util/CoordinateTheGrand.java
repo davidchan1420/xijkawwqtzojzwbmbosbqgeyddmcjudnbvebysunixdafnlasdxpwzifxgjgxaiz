@@ -1,5 +1,8 @@
 package movieservice.util;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class CoordinateTheGrand extends Coordinate {
 
 	private String urlChi;
@@ -11,6 +14,29 @@ public class CoordinateTheGrand extends Coordinate {
 	//TODO: We don't open this URL to get the fee because it will greatly slow down the speed
 //	public static final String URL_FEE_CHI = "https://www.thegrandcinema.com.hk/visSelectTickets.aspx?visLang=1&cinemacode=009&txtSessionId=";
 //	public static final String URL_FEE_ENG = "https://www.thegrandcinema.com.hk/visSelectTickets.aspx?visLang=2&cinemacode=009&txtSessionId=";
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(urlChi == null ? "" : urlChi);
+		dest.writeString(urlEng == null ? "" : urlEng);
+	}
+	
+	public CoordinateTheGrand(Parcel in){
+		super(in);
+		urlChi = in.readString().equalsIgnoreCase("") ? null : in.readString();
+		urlEng = in.readString().equalsIgnoreCase("") ? null : in.readString();
+	}
+	
+	public static final Parcelable.Creator<CoordinateTheGrand> CREATOR = new Parcelable.Creator<CoordinateTheGrand>() {
+		public CoordinateTheGrand createFromParcel(Parcel in) {
+			return new CoordinateTheGrand(in);
+		}
+
+		public CoordinateTheGrand[] newArray(int size) {
+			return new CoordinateTheGrand[size];
+		}
+	};	
 	
 	
 	// For Comparison

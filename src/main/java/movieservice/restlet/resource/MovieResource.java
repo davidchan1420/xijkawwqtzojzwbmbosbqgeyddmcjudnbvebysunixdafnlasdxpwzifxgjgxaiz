@@ -12,9 +12,11 @@ import com.google.gson.Gson;
 
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
+import movieservice.domain.Temp1;
 import movieservice.service.impl.SearchServiceImpl;
 import movieservice.util.CalendarUtil;
 import movieservice.util.ConstantUtil;
+import movieservice.util.Coordinate;
 
 @Path("movie")
 public class MovieResource {	
@@ -55,6 +57,41 @@ public class MovieResource {
 		System.out.println("result size: " + result.size());
 		
 		String gsonResult = gson.toJson(result);
+		return gsonResult;
+	}
+	
+	//TODO: DEBUG ONLY
+	@GET
+	@Path("getTest/{searchCriteria}")
+	public String getTest(@PathParam("searchCriteria") String argSearchCriteria){
+		
+		Gson gson = new Gson();
+		
+		ArrayList<Movie> list = new ArrayList<Movie>();
+		
+		Movie movie = new Movie();
+		movie.setCinema("cinema1");
+		
+//		Coordinate coordinate = new Coordinate();
+//		coordinate.setCinemaChinese("cinemaChinese1");
+//		coordinate.setCinemaEnglish("cinemaEnglish1");
+//		coordinate.setX(1D);
+//		coordinate.setY(1D);		
+//		movie.setCoordinate(coordinate);
+		
+		Temp1 temp1 = new Temp1();
+		temp1.setName("shit");
+		movie.setTemp1(temp1);
+		
+		movie.setFee(100);
+		movie.setMovieName("movieName1");
+		movie.setRelativeDistance(5D);
+		Calendar calendar = CalendarUtil.getSystemCalendar();
+		movie.setShowingDate(calendar);
+		
+		list.add(movie);
+						
+		String gsonResult = gson.toJson(list);
 		return gsonResult;
 	}
 	

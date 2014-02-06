@@ -1,10 +1,36 @@
 package movieservice.util;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 public class CoordinateBroadway extends Coordinate{
 
 	private String displayNameEnglish;
 	private String displayNameChinese;
 	
+	
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		super.writeToParcel(dest, flags);
+		dest.writeString(displayNameEnglish == null ? "" : displayNameEnglish);
+		dest.writeString(displayNameChinese == null ? "" : displayNameChinese);
+	}
+	
+	public CoordinateBroadway(Parcel in){
+		super(in);
+		displayNameEnglish = in.readString().equalsIgnoreCase("") ? null : in.readString();
+		displayNameChinese = in.readString().equalsIgnoreCase("") ? null : in.readString();		
+	}
+	
+	public static final Parcelable.Creator<CoordinateBroadway> CREATOR = new Parcelable.Creator<CoordinateBroadway>() {
+		public CoordinateBroadway createFromParcel(Parcel in) {
+			return new CoordinateBroadway(in);
+		}
+
+		public CoordinateBroadway[] newArray(int size) {
+			return new CoordinateBroadway[size];
+		}
+	};	
 	
 	public CoordinateBroadway(){}
 	
