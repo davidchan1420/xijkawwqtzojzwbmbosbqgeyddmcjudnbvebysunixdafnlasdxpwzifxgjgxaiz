@@ -18,14 +18,18 @@ public class CoordinateTheGrand extends Coordinate {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeString(urlChi == null ? "" : urlChi);
-		dest.writeString(urlEng == null ? "" : urlEng);
+//		dest.writeString(urlChi == null ? "" : urlChi);
+//		dest.writeString(urlEng == null ? "" : urlEng);
+		dest.writeValue(urlChi);
+		dest.writeValue(urlEng);
 	}
 	
 	public CoordinateTheGrand(Parcel in){
 		super(in);
-		urlChi = in.readString().equalsIgnoreCase("") ? null : in.readString();
-		urlEng = in.readString().equalsIgnoreCase("") ? null : in.readString();
+//		urlChi = in.readString().equalsIgnoreCase("") ? null : in.readString();
+//		urlEng = in.readString().equalsIgnoreCase("") ? null : in.readString();
+		urlChi = (String) in.readValue(CoordinateTheGrand.class.getClassLoader());
+		urlEng = (String) in.readValue(CoordinateTheGrand.class.getClassLoader());
 	}
 	
 	public static final Parcelable.Creator<CoordinateTheGrand> CREATOR = new Parcelable.Creator<CoordinateTheGrand>() {

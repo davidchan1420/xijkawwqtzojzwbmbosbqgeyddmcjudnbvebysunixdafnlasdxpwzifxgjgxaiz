@@ -12,14 +12,20 @@ public class CoordinateBroadway extends Coordinate{
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeString(displayNameEnglish == null ? "" : displayNameEnglish);
-		dest.writeString(displayNameChinese == null ? "" : displayNameChinese);
+//		dest.writeString(displayNameEnglish == null ? "" : displayNameEnglish);
+//		dest.writeString(displayNameChinese == null ? "" : displayNameChinese);
+		dest.writeValue(displayNameEnglish);
+		dest.writeValue(displayNameChinese);
+		
 	}
 	
 	public CoordinateBroadway(Parcel in){
 		super(in);
-		displayNameEnglish = in.readString().equalsIgnoreCase("") ? null : in.readString();
-		displayNameChinese = in.readString().equalsIgnoreCase("") ? null : in.readString();		
+//		displayNameEnglish = in.readString().equalsIgnoreCase("") ? null : in.readString();
+//		displayNameChinese = in.readString().equalsIgnoreCase("") ? null : in.readString();
+		displayNameEnglish = (String) in.readValue(CoordinateBroadway.class.getClassLoader());
+		displayNameChinese = (String) in.readValue(CoordinateBroadway.class.getClassLoader());
+		
 	}
 	
 	public static final Parcelable.Creator<CoordinateBroadway> CREATOR = new Parcelable.Creator<CoordinateBroadway>() {

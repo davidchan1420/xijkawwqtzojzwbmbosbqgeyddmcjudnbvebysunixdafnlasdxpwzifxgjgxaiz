@@ -24,6 +24,8 @@ public class ConstantUtil {
 		
 		listCinemaTheGrand.add(new CoordinateTheGrand("The Grand Cinema", "The Grand Cinema", 22.304776D, 114.161789D));
 		
+		
+		listCinema.add(new Coordinate("the sky (奧海城)", "the sky Olympian City", 22.316798D, 114.161513D));
 		listCinema.add(new Coordinate("海運戲院 (超巨幕)", "Grand Ocean (Xtreme)", 22.295256D, 114.169377D));		
 		listCinema.add(new Coordinate("嘉禾港威", "Golden Gateway", 22.299378D, 114.167961D));		
 		listCinema.add(new Coordinate("嘉禾青衣", "GH Tsing Yi", 22.359338D, 114.108255D));		

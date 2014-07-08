@@ -15,14 +15,18 @@ public class CoordinateUA extends Coordinate {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
-		dest.writeString(urlChi == null ? "" : urlChi);
-		dest.writeString(urlEng == null ? "" : urlEng);
+//		dest.writeString(urlChi == null ? "" : urlChi);
+//		dest.writeString(urlEng == null ? "" : urlEng);
+		dest.writeValue(urlChi);
+		dest.writeValue(urlEng);		
 	}
 	
 	public CoordinateUA(Parcel in){
 		super(in);
-		urlChi = in.readString().equalsIgnoreCase("") ? null : in.readString();
-		urlEng = in.readString().equalsIgnoreCase("") ? null : in.readString();		
+//		urlChi = in.readString().equalsIgnoreCase("") ? null : in.readString();
+//		urlEng = in.readString().equalsIgnoreCase("") ? null : in.readString();
+		urlChi = (String) in.readValue(CoordinateUA.class.getClassLoader());
+		urlEng = (String) in.readValue(CoordinateUA.class.getClassLoader());
 	}
 	
 	public static final Parcelable.Creator<CoordinateUA> CREATOR = new Parcelable.Creator<CoordinateUA>() {
