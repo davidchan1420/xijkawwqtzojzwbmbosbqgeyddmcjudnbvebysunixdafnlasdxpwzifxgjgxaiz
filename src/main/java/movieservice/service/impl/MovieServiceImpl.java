@@ -390,8 +390,10 @@ public class MovieServiceImpl implements MovieService {
 		URLConnection connection;
 		BufferedReader in;
 		String inputLine;
+		
 		String regMovieName = "<td align=\".+?\" class=\".+?\"><a style=\".+?\" href=\".+?\">(.+?)</a>";		
-		String regCinema = "<td width=\".+?\" align=\".+?\" nowrap class=\".+?\"><a class=\".+?\" href=\".+?\">(.+?)</a></td>";		
+//		String regCinema = "<td width=\".+?\" align=\".+?\" nowrap class=\".+?\"><a class=\".+?\" href=\".+?\">(.+?)</a></td>";		
+		String regCinema = "<a class=\".+?\" href=\".+?\">(.+?)</a>";
 
 		HashMap<String, String> mapRegTime = new HashMap<String, String>();
 		mapRegTime.put(ConstantUtil.LANG_CHI, "<option value=\".+?\">.+?,\\s(\\d{1,2}).{1}(\\d{1,2}).{1}\\s(\\d{2}):(\\d{2})\\s(\\w{2}).+?\\$(\\d{2,3}).*?</option>");
@@ -415,7 +417,15 @@ public class MovieServiceImpl implements MovieService {
 				Matcher matMovieName = patMovieName.matcher(inputLine);
 				if (matMovieName.find()) {
 //					System.out.println(matMovieName.group(1));
-					movieName = matMovieName.group(1);
+					
+					String unFiltered = matMovieName.group(1);
+//					int index = unFiltered.indexOf("<br/>");
+//					if(index != -1){						
+//						movieName = unFiltered.substring(0, index);						
+//					}else{
+//						movieName = unFiltered;	
+//					}
+					movieName = unFiltered.replace("<br/>", " ");
 				}
 
 				Pattern patCinema = Pattern.compile(regCinema);
@@ -698,35 +708,35 @@ public class MovieServiceImpl implements MovieService {
 		MovieServiceImpl instance = new MovieServiceImpl();
 		List<Movie> list = new ArrayList<Movie>();
 		
-		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-		if (list1 != null) {
-			list.addAll(list1);
-		}
+//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+//		if (list1 != null) {
+//			list.addAll(list1);
+//		}
 //		System.out.println("Finished MCL...");
-		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-		if (list2 != null) {
-			list.addAll(list2);
-		}
+//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+//		if (list2 != null) {
+//			list.addAll(list2);
+//		}
 //		System.out.println("Finished The Grand...");
-		List<Movie> list3 = instance.getUAMovies(searchCriteria);
-		if (list3 != null) {
-			list.addAll(list3);
-		}
+//		List<Movie> list3 = instance.getUAMovies(searchCriteria);
+//		if (list3 != null) {
+//			list.addAll(list3);
+//		}
 //		System.out.println("Finished UA...");
 		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
 		if (list4 != null) {
 			list.addAll(list4);
 		}
-//		System.out.println("Finished Golden Harvest...");
-		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
-		if (list5 != null) {
-			list.addAll(list5);
-		}
+		System.out.println("Finished Golden Harvest...");
+//		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
+//		if (list5 != null) {
+//			list.addAll(list5);
+//		}
 //		System.out.println("Finished Broadway...");
-		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
-		if (list6 != null) {
-			list.addAll(list6);
-		}
+//		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
+//		if (list6 != null) {
+//			list.addAll(list6);
+//		}
 //		System.out.println("Finished AMC...");
 	
 		return list;		
