@@ -12,8 +12,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.1</version>
         <configuration>
-          <source/>
-          <target/>
+          <source>1.7</source>
+		  <target>1.7</target>
         </configuration>
       </plugin> 
       <plugin>
@@ -95,9 +95,9 @@
 		<dependency>
 			<groupId>myGroupId</groupId>
 			<artifactId>myArtifactId</artifactId>
-			<version>18</version>
+			<version>19</version>
 			<scope>system</scope>
-			<systemPath>/home/roamerchan/Program/android-sdk-linux/platforms/android-18/android.jar</systemPath>
+			<systemPath>/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar</systemPath>
 		</dependency>
   </dependencies>
 </project>
