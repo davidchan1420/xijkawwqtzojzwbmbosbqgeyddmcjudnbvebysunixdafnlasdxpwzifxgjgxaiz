@@ -708,35 +708,35 @@ public class MovieServiceImpl implements MovieService {
 		MovieServiceImpl instance = new MovieServiceImpl();
 		List<Movie> list = new ArrayList<Movie>();
 		
-//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-//		if (list1 != null) {
-//			list.addAll(list1);
-//		}
+		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+		if (list1 != null) {
+			list.addAll(list1);
+		}
 //		System.out.println("Finished MCL...");
-//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-//		if (list2 != null) {
-//			list.addAll(list2);
-//		}
+		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+		if (list2 != null) {
+			list.addAll(list2);
+		}
 //		System.out.println("Finished The Grand...");
-//		List<Movie> list3 = instance.getUAMovies(searchCriteria);
-//		if (list3 != null) {
-//			list.addAll(list3);
-//		}
+		List<Movie> list3 = instance.getUAMovies(searchCriteria);
+		if (list3 != null) {
+			list.addAll(list3);
+		}
 //		System.out.println("Finished UA...");
 		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
 		if (list4 != null) {
 			list.addAll(list4);
 		}
-		System.out.println("Finished Golden Harvest...");
-//		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
-//		if (list5 != null) {
-//			list.addAll(list5);
-//		}
+//		System.out.println("Finished Golden Harvest...");
+		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
+		if (list5 != null) {
+			list.addAll(list5);
+		}
 //		System.out.println("Finished Broadway...");
-//		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
-//		if (list6 != null) {
-//			list.addAll(list6);
-//		}
+		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
+		if (list6 != null) {
+			list.addAll(list6);
+		}
 //		System.out.println("Finished AMC...");
 	
 		return list;		
