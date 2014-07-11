@@ -52,9 +52,9 @@ public class MovieResource {
 		
 		for (int i = 0; i < result.size(); i++) {
 			Movie movie = result.get(i);
-			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
+//			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
 		}
-		System.out.println("result size: " + result.size());
+//		System.out.println("result size: " + result.size());
 		
 		String gsonResult = gson.toJson(result);
 		return gsonResult;
