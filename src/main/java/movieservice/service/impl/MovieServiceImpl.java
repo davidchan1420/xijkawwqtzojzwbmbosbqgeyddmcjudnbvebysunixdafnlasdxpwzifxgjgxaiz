@@ -334,7 +334,8 @@ public class MovieServiceImpl implements MovieService {
 					}
 
 					cinema = searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? coordUA.getCinemaChinese() : coordUA.getCinemaEnglish();
-						
+//					System.out.println(cinema);					
+					
 					// Calculate Relative Distance for each Cinema
 //					if(searchCriteria.getDistanceRange() != null){						
 //						relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, coordUA);					

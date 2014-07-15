@@ -13,7 +13,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar"/>
+	<classpathentry kind="lib" path="/home/roamerchan/Program/android-sdk-linux/platforms/android-19/android.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

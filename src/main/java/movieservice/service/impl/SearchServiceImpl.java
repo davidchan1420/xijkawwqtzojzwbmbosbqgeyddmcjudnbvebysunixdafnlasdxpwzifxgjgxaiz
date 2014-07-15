@@ -96,6 +96,7 @@ public class SearchServiceImpl implements SearchService {
 			Movie movie = movies.get(i);
 			
 			String cinema = movie.getCinema().toLowerCase();
+			
 			if(cinema.contains(searchCinema)){
 				result.add(movie);				
 			}			
@@ -106,7 +107,9 @@ public class SearchServiceImpl implements SearchService {
 	@Override
 	public List<Movie> filterByDistance(SearchCriteria searchCriteria, List<Movie> movies) {
 		
-		if(searchCriteria.getDistanceRange() == null)
+//		if(searchCriteria.getDistanceRange() == null)
+//			return movies;
+		if(searchCriteria.getX() == null || searchCriteria.getY() == null)
 			return movies;
 		
 		List<Movie> result = new ArrayList<Movie>();
@@ -117,7 +120,8 @@ public class SearchServiceImpl implements SearchService {
 			Movie movie = movies.get(i);
 			Double relativeDistance = MovieUtil.getRelativeDistance(searchCriteria, movie.getCoordinate());
 			
-			if(relativeDistance <= searchDistance){
+//			if(relativeDistance <= searchDistance){
+			if(searchDistance == 0 || relativeDistance <= searchDistance){
 				movie.setRelativeDistance(relativeDistance);
 				result.add(movie);
 			}			
