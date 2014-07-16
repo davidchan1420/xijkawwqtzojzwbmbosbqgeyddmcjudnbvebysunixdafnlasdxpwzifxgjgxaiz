@@ -94,10 +94,18 @@
 		</dependency>	
 		<dependency>
 			<groupId>myGroupId</groupId>
-			<artifactId>myArtifactId</artifactId>
+			<artifactId>android19</artifactId>
 			<version>19</version>
 			<scope>system</scope>
-			<systemPath>/home/roamerchan/Program/android-sdk-linux/platforms/android-19/android.jar</systemPath>
+			<systemPath>/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar</systemPath>
 		</dependency>
+		<dependency>
+			<groupId>myGroupId</groupId>
+			<artifactId>movieServiceCommon</artifactId>
+			<version>19</version>
+			<scope>system</scope>
+			<systemPath>/home/roamerecom/workspace_template/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath>
+		</dependency>
+		
   </dependencies>
 </project>
