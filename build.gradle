@@ -1,0 +1,47 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+version = '1.0'
+
+jar {
+	from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    manifest {
+        attributes 'Implementation-Title': 'Gradle Quickstart', 'Implementation-Version': version, 'Main-Class': 'movieservice.restlet.server.RestletMovieServiceLaunch'
+        
+    }
+}
+
+repositories {
+
+    mavenCentral()
+    
+    maven {
+        url "http://maven.restlet.com"
+    }
+}
+
+dependencies {
+
+    compile (
+    	'com.javadocmd:simplelatlng:1.3.0',
+    	'com.google.code.gson:gson:2.2.4',
+    	'org.restlet.jee:org.restlet:2.1-RC1',
+    	'org.restlet.jee:org.restlet.ext.jaxrs:2.1-RC1',
+    	'javax.ws.rs:jsr311-api:1.1.1',
+    	'org.restlet.jee:org.restlet.ext.json:2.1-RC1',
+    	'org.restlet.jee:org.restlet.ext.jackson:2.1-RC1'
+    	
+    )
+    compile files('/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar')
+    
+    
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+
