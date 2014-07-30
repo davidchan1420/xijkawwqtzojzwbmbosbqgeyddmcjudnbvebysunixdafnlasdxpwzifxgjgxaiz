@@ -23,6 +23,8 @@ repositories {
 
 dependencies {
 
+	compile project(':MovieService_Common') 
+
     compile (
     	'com.javadocmd:simplelatlng:1.3.0',
     	'com.google.code.gson:gson:2.2.4',
@@ -33,7 +35,7 @@ dependencies {
     	'org.restlet.jee:org.restlet.ext.jackson:2.1-RC1'
     	
     )
-    compile files('/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar')
+    compile files('/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar')   
     
     
     testCompile group: 'junit', name: 'junit', version: '4.+'
