@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
-import movieservice.domain.Temp1;
 import movieservice.service.impl.SearchServiceImpl;
 import movieservice.util.CalendarUtil;
 import movieservice.util.ConstantUtil;
