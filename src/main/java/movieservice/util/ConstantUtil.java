@@ -7,6 +7,7 @@ public class ConstantUtil {
 	public static final String LANG_CHI = "zh";
 	public static final String LANG_ENG = "en";	
 	private static final String MCL = "MCL";
+	public static final String BIG5 = "Big5";
 		
 	//public static HashMap<String, ArrayList<Coordinate>> mapCinema = new HashMap<String, ArrayList<Coordinate>>();
 	public static final ArrayList<Coordinate> listCinema = new ArrayList<Coordinate>();
