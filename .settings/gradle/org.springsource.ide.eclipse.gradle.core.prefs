@@ -1,5 +1,6 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
-#Fri Jul 25 17:39:01 HKT 2014
+#Mon Dec 29 13:22:42 HKT 2014
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;../MovieService_Common;
 org.springsource.ide.eclipse.gradle.classpath.enableSorting=true
 org.springsource.ide.eclipse.gradle.classpath.jar.remap.gradle.to.maven=true
 org.springsource.ide.eclipse.gradle.linkedresources=

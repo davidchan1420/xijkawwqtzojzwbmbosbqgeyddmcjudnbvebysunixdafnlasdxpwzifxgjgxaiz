@@ -1,6 +1,7 @@
 package movieservice.service.impl;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
@@ -15,15 +16,24 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
+//import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.DefaultHttpClientConnection;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+//import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
@@ -50,7 +60,7 @@ public class MovieServiceImpl implements MovieService {
 	private static HashMap<String, Integer> mapAPM = new HashMap<String, Integer>();
 	
 	private static final String CURL_BROADWAY_AVAILABLE_SEAT = "https://www.cinema.com.hk/revamp/html/show_seat.php";
-	private static final String CURL_BROADWAY_DATA = "show_id=";
+	private static final String CURL_BROADWAY_POST_PARAMETER = "show_id=";
 
 	static {
 		
@@ -506,65 +516,106 @@ public class MovieServiceImpl implements MovieService {
 		return listMovie;
 	}
 	
+	//TODO: Abandoned because the HttpClient API overlapped with the one in Android
+//	public static BufferedReader curlBroadwayAvailableSeat(String showId) {
+//
+//		BufferedReader in = null;
+//
+//		HttpClient httpClient = HttpClientBuilder.create().build();		
+////		httpClient.getParams().setParameter("http.socket.timeout", timeout * 1000);
+////		httpClient.getParams().setParameter("http.connection.timeout", timeout * 1000);
+////		httpClient.getParams().setParameter("http.connection-manager.timeout", new Long(timeout * 1000));
+////		httpClient.getParams().setParameter("http.protocol.head-body-timeout", timeout * 1000);		
+//
+//		// Request configuration can be overridden at the request level.
+//		// They will take precedence over the one set at the client level.
+//		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
+//		requestConfigBuilder.setSocketTimeout(READ_TIMEOUT);
+//		requestConfigBuilder.setConnectTimeout(READ_TIMEOUT);
+//		requestConfigBuilder.setConnectionRequestTimeout(READ_TIMEOUT);
+//		
+//		RequestConfig requestConfig = requestConfigBuilder.build();
+//		HttpPost httpPost = new HttpPost(CURL_BROADWAY_AVAILABLE_SEAT);
+//		httpPost.setConfig(requestConfig);
+//		
+//		// List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+//		// nameValuePairs.add(new BasicNameValuePair("data", data));
+//
+//		try {
+//			
+//			// httpPost.setHeader("Accept",
+//			// "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
+//			httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+//			// httpPost.setHeader("Accept-Encoding", "gzip,deflate");
+//			// httpPost.setHeader("Accept-Language", "en-US,en;q=0.8,zh-TW;q=0.6,zh;q=0.4");
+//
+//			// add the param to postRequest
+//			// httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//			httpPost.setEntity(new StringEntity(CURL_BROADWAY_POST_PARAMETER + showId));
+//
+//			// obtain the response
+//			HttpResponse response = httpClient.execute(httpPost);
+//			
+//			HttpEntity entity = response.getEntity();
+//	
+//			in = new BufferedReader(new InputStreamReader(entity.getContent(), "Big5"));
+//
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		} catch (ClientProtocolException e) {
+//			e.printStackTrace();
+//		} catch (SocketTimeoutException e){
+//			e.printStackTrace();
+//		} catch (ConnectTimeoutException e){
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		
+//		return in;
+//	}
+	
 	public static BufferedReader curlBroadwayAvailableSeat(String showId) {
 
-		BufferedReader in = null;
-
-		HttpClient httpClient = HttpClientBuilder.create().build();
+		BufferedReader in = null;		
 		
-//		httpClient.getParams().setParameter("http.socket.timeout", timeout * 1000);
-//		httpClient.getParams().setParameter("http.connection.timeout", timeout * 1000);
-//		httpClient.getParams().setParameter("http.connection-manager.timeout", new Long(timeout * 1000));
-//		httpClient.getParams().setParameter("http.protocol.head-body-timeout", timeout * 1000);
-
-		// Request configuration can be overridden at the request level.
-		// They will take precedence over the one set at the client level.
-		RequestConfig.Builder requestConfigBuilder = RequestConfig.custom();
-		requestConfigBuilder.setSocketTimeout(READ_TIMEOUT);
-		requestConfigBuilder.setConnectTimeout(READ_TIMEOUT);
-		requestConfigBuilder.setConnectionRequestTimeout(READ_TIMEOUT);
-		
-		RequestConfig requestConfig = requestConfigBuilder.build();
-
-		HttpPost httpPost = new HttpPost(CURL_BROADWAY_AVAILABLE_SEAT);
-		httpPost.setConfig(requestConfig);
-
-		// List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		// nameValuePairs.add(new BasicNameValuePair("data", data));
-
 		try {
 			
-			// httpPost.setHeader("Accept",
-			// "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-			httpPost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-			// httpPost.setHeader("Accept-Encoding", "gzip,deflate");
-			// httpPost.setHeader("Accept-Language", "en-US,en;q=0.8,zh-TW;q=0.6,zh;q=0.4");
-
-			// add the param to postRequest
-			// httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-			httpPost.setEntity(new StringEntity(CURL_BROADWAY_DATA + showId));
-
-			// obtain the response
-			HttpResponse response = httpClient.execute(httpPost);
+			URL obj = new URL(CURL_BROADWAY_AVAILABLE_SEAT);
 			
-			HttpEntity entity = response.getEntity();
-	
-			in = new BufferedReader(new InputStreamReader(entity.getContent(), "Big5"));
+			HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+			con.setConnectTimeout(READ_TIMEOUT);
+			con.setReadTimeout(READ_TIMEOUT);
 
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (SocketTimeoutException e){
-			e.printStackTrace();
-		} catch (ConnectTimeoutException e){
-			e.printStackTrace();
+			// add request header
+			con.setRequestMethod("POST");
+			// con.setRequestProperty("User-Agent", "Mozilla/5.0");
+			// con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+			con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			
+			String urlParameters = CURL_BROADWAY_POST_PARAMETER + showId;
+			
+			// Send post request
+			con.setDoOutput(true);
+			
+			DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+			wr.writeBytes(urlParameters);
+			wr.flush();
+			wr.close();
+			
+			in = new BufferedReader(new InputStreamReader(con.getInputStream(), "Big5"));
+
+//			int responseCode = con.getResponseCode();
+//			System.out.println("\nSending 'POST' request to URL : " + url);
+//			System.out.println("Post parameters : " + urlParameters);
+//			System.out.println("Response Code : " + responseCode);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-		
+		}		
+
 		return in;
 	}
 	
@@ -631,50 +682,55 @@ public class MovieServiceImpl implements MovieService {
 //					movie.setRelativeDistance(relativeDistance);
 					movie.setCoordinate(coordinateBroadway);
 					
-					//TODO: Get the available seat by CURL
 					BufferedReader inCurl = curlBroadwayAvailableSeat(matTime.group(1));
 					
 					String inputLineCurl;
 					
-					if(inCurl != null){					
+					if(inCurl != null){
 					
 						int countNormalSeat = 0, countVibratingSeat = 0, countWheelChairSeat = 0;			
 						
 						try {
 							
-							int i = 0;
-							
+//							int i = 0;							
 							Pattern patNormalSeat = Pattern.compile("<td class='seat_A'  >\\d{1,2}</td>");
 							Pattern patVibratingSeat = Pattern.compile("<td class='seat_AS'  >\\d{1,2}</td>");				
 							Pattern patWheelChairSeat = Pattern.compile("<td class='seat_buy'>\\d{1,2}</td>");
 							
 							while ((inputLineCurl = inCurl.readLine()) != null) {
 						
-//								System.out.println(i++ + "---" + inputLineCurl);
-								
+//								System.out.println(i++ + "---" + inputLineCurl);								
 								Matcher matNormalSeat = patNormalSeat.matcher(inputLineCurl);
 								Matcher matVibratingSeat = patVibratingSeat.matcher(inputLineCurl);					
 								Matcher matWheelChairSeat = patWheelChairSeat.matcher(inputLineCurl);
 								
-								while(matNormalSeat.find()) {
+								while(matNormalSeat.find()) {									
 									
+									movie.setNormalSeat(movie.getNormalSeat() + 1);
 									countNormalSeat++;
 								}
 								while(matVibratingSeat.find()) {
 									
+									movie.setVibratingSeat(movie.getVibratingSeat() + 1);
 									countVibratingSeat++;
 								}
 								while(matWheelChairSeat.find()) {
 									
+									movie.setWheelChairSeat(movie.getWheelChairSeat() + 1);
 									countWheelChairSeat++;
 								}
 								
 							}				
 							
-							in.close();
+							inCurl.close();
 						} catch (IOException e) {
+							movie.setNormalSeat(null);
+							movie.setVibratingSeat(null);
+							movie.setWheelChairSeat(null);
 							e.printStackTrace();
 						}		
+						
+						System.out.println("Movie Name: " + movieName + ", Cinema Name: " + cinema);
 						
 						System.out.println("Normal Seat: " + countNormalSeat);
 						System.out.println("Vibrating Seat: " + countVibratingSeat);
@@ -697,6 +753,8 @@ public class MovieServiceImpl implements MovieService {
 					checkNextYear(calToday, calMovie);
 
 					movie.setShowingDate(calMovie);
+					
+					System.out.println("Showing Date: " + calMovie.getTime());
 					
 					movie.setFee(Integer.parseInt(matTime.group(7)));
 					
@@ -839,29 +897,29 @@ public class MovieServiceImpl implements MovieService {
 		MovieServiceImpl instance = new MovieServiceImpl();
 		List<Movie> list = new ArrayList<Movie>();
 		
-//		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
-//		if (list1 != null) {
-//			list.addAll(list1);
-//		}
-//		System.out.println("Finished MCL...");
+		List<Movie> list1 = instance.getMCLMovies(searchCriteria);
+		if (list1 != null) {
+			list.addAll(list1);
+		}
+		System.out.println("Finished MCL...");
 		
-//		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
-//		if (list2 != null) {
-//			list.addAll(list2);
-//		}
-//		System.out.println("Finished The Grand...");
+		List<Movie> list2 = instance.getTheGrandMovies(searchCriteria);
+		if (list2 != null) {
+			list.addAll(list2);
+		}
+		System.out.println("Finished The Grand...");
 		
-//		List<Movie> list3 = instance.getUAMovies(searchCriteria);
-//		if (list3 != null) {
-//			list.addAll(list3);
-//		}
-//		System.out.println("Finished UA...");
+		List<Movie> list3 = instance.getUAMovies(searchCriteria);
+		if (list3 != null) {
+			list.addAll(list3);
+		}
+		System.out.println("Finished UA...");
 		
-//		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
-//		if (list4 != null) {
-//			list.addAll(list4);
-//		}
-//		System.out.println("Finished Golden Harvest...");
+		List<Movie> list4 = instance.getGoldenHarvestMovies(searchCriteria);
+		if (list4 != null) {
+			list.addAll(list4);
+		}
+		System.out.println("Finished Golden Harvest...");
 		
 		List<Movie> list5 = instance.getBroadwayMovies(searchCriteria);
 		if (list5 != null) {
@@ -869,11 +927,11 @@ public class MovieServiceImpl implements MovieService {
 		}
 		System.out.println("Finished Broadway...");
 		
-//		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
-//		if (list6 != null) {
-//			list.addAll(list6);
-//		}
-//		System.out.println("Finished AMC...");
+		List<Movie> list6 = instance.getAMCMovies(searchCriteria);
+		if (list6 != null) {
+			list.addAll(list6);
+		}
+		System.out.println("Finished AMC...");
 	
 		return list;		
 	}
