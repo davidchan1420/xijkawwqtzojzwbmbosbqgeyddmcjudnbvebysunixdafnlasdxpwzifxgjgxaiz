@@ -106,6 +106,6 @@
 			<scope>system</scope>
 			<systemPath>/home/roamerchan/workspace_template/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath>
 		</dependency>
-		
+	
   </dependencies>
 </project>

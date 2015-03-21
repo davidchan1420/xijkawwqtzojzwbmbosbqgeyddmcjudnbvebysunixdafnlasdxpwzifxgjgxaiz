@@ -132,16 +132,25 @@ http://www.cinema.com.hk/revamp/html/movie_ticketing.php?lang=e&mode=ticketing
 	<td class="movie_listbox"><a >戲院名稱</a></td>
 
 	<select class="movie_listbox" >													
-		<option >01/11 11:50PM (Fri)  3院 $75</option>	
-		<option >02/11 09:10AM (Sat)  3院*  $45</option>			
+		<option value="$SHOW_ID">01/11 11:50PM (Fri)  3院 $75</option>	
+		<option value="$SHOW_ID">02/11 09:10AM (Sat)  3院*  $45</option>			
 	</select>
 
 	<td class="movie_listbox"><a >戲院名稱</a></td>
 
 	<select class="movie_listbox" >													
-		<option >01/11 09:50PM (Fri)  1院 $65</option>
-		<option >02/11 11:05AM (Sat)  3院*  $65</option>
+		<option value="$SHOW_ID">01/11 09:50PM (Fri)  1院 $65</option>
+		<option value="$SHOW_ID">02/11 11:05AM (Sat)  3院*  $65</option>
 	</select>
+
+the world of kanako, 11-06, 9:50pm
+curl 'http://www.cinema.com.hk/revamp/html/show_seat.php' --data 'lang=e&show_id=5161357' --compressed
+breakup buddies, 11-03, 1:45pm
+curl 'http://www.cinema.com.hk/revamp/html/show_seat.php' --data 'lang=e&show_id=10109749' --compressed
+
+<td class="seat_A">5</td>	//Normal Seat
+<td class="seat_buy">3</td>	//WheelChair Seat
+<td class="seat_AS">15</td>	//Vibrating Seat
 
 ####################   AMC   ####################
 Chinese Version:
