@@ -3,4 +3,4 @@
 /build/
 /pom.xml
 /.gitignore
-.gradle
+/.gradle/*
