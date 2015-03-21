@@ -12,7 +12,6 @@ import com.google.gson.Gson;
 
 import movieservice.domain.Movie;
 import movieservice.domain.SearchCriteria;
-import movieservice.domain.Temp1;
 import movieservice.service.impl.SearchServiceImpl;
 import movieservice.util.CalendarUtil;
 import movieservice.util.ConstantUtil;
@@ -50,11 +49,15 @@ public class MovieResource {
 		SearchServiceImpl searchService = new SearchServiceImpl();
 		List<Movie> result = searchService.filterMovies(searchCriteria, searchCriteria.getLanguage().equalsIgnoreCase(ConstantUtil.LANG_CHI) ? moviesChi : moviesEng);		
 		
-		for (int i = 0; i < result.size(); i++) {
-			Movie movie = result.get(i);
+//		for (int i = 0; i < result.size(); i++) {
+//			Movie movie = result.get(i);
 //			System.out.println("Movie Name: " + movie.getMovieName() + ", Cinema: " + movie.getCinema() + ", Distance: " + movie.getRelativeDistance() + ", Time: " + movie.getShowingDate().getTime() + ", Fee: $" + movie.getFee());
-		}
+//		}
 //		System.out.println("result size: " + result.size());
+		
+		if(result.size() > 500){
+			result = new ArrayList<Movie>(result.subList(0, 500));
+		}
 		
 		String gsonResult = gson.toJson(result);
 		return gsonResult;

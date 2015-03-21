@@ -104,7 +104,7 @@
 			<artifactId>movieServiceCommon</artifactId>
 			<version>19</version>
 			<scope>system</scope>
-			<systemPath>/home/roamerecom/workspace_template/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath>
+			<systemPath>/home/roamerchan/workspace_template/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath>
 		</dependency>
 		
   </dependencies>
