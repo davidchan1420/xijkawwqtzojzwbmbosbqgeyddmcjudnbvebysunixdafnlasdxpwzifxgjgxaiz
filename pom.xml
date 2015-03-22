@@ -104,7 +104,7 @@
 			<groupId>myGroupId</groupId>
 			<artifactId>movieServiceCommon</artifactId>
 			<version>0.1</version>
-			<!-- For compile time usage, maven clean install won't pack this jar for runtime!! -->
+			<!-- For compile time usage, maven clean install won't pack this jar for runtime!! Remove below 2 lines in mvn clean install -->
 <!-- 			<scope>system</scope> -->
 <!-- 			<systemPath>/home/roamerchan/Data/my-Eclipse-TEST/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath> -->
 		</dependency>
