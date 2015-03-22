@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>MovieService_Restlet</groupId>
   <artifactId>MovieService_Restlet</artifactId>
-  <version>0.0.2</version>
+  <version>1.3</version>
   <packaging>jar</packaging>
   
   <build>
@@ -94,17 +94,19 @@
 		</dependency>	
 		<dependency>
 			<groupId>myGroupId</groupId>
-			<artifactId>android19</artifactId>
-			<version>19</version>
-			<scope>system</scope>
-			<systemPath>/home/roamerecom/Program/android-sdk-linux/platforms/android-19/android.jar</systemPath>
+			<artifactId>android</artifactId>
+			<version>21</version>		
+			<!-- For compile time usage, maven clean install won't pack this jar for runtime!! -->	
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>/home/roamerchan/Program/android-sdk-linux/platforms/android-21/android.jar</systemPath> -->
 		</dependency>
 		<dependency>
 			<groupId>myGroupId</groupId>
 			<artifactId>movieServiceCommon</artifactId>
-			<version>19</version>
-			<scope>system</scope>
-			<systemPath>/home/roamerchan/workspace_template/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath>
+			<version>0.1</version>
+			<!-- For compile time usage, maven clean install won't pack this jar for runtime!! -->
+<!-- 			<scope>system</scope> -->
+<!-- 			<systemPath>/home/roamerchan/Data/my-Eclipse-TEST/MovieService_Common/target/MovieService_Common-0.1.jar</systemPath> -->
 		</dependency>
 	
   </dependencies>
